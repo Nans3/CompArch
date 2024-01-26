@@ -11,5 +11,14 @@ module regfile (input logic         clk,
    // write third port on rising edge of clock
    // register 0 hardwired to 0
    
+   always_ff @ (posedge clk) 
+     begin
+	if (we3 && (wa3 != 0))
+     rf[wa3] <= wd3;
+     end
+   
+   assign rd1 = rf[ra1];
+   assign rd2 = rf[ra2];
+   assign rf[0] = 0;
    
 endmodule // regfile

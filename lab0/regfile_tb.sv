@@ -1,5 +1,5 @@
-module stimulus ();
-//tested
+module testbench ();
+     //test
    logic  clock;
    logic  In;
    logic  reset_b;
