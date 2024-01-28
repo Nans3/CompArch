@@ -11,34 +11,36 @@
 # //  is prohibited from disclosure under the Trade Secrets Act,
 # //  18 U.S.C. Section 1905.
 # //
-# do FSM.do
+# do regfile.do
 # ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is tyler@DESKTOP-TT232T9.
 # ** Warning: (vdel-134) Unable to remove locked optimized design "_opt1".  Locker is tyler@DESKTOP-TT232T9.
 # ** Warning: (vlib-34) Library already exists at "work".
 # Errors: 0, Warnings: 1
 # Model Technology ModelSim SE-64 vlog 2021.3 Compiler 2021.07 Jul 13 2021
-# Start time: 16:46:07 on Jan 27,2024
-# vlog -reportprogress 300 FSM.sv FSM_tb.sv 
-# -- Compiling module FSM
-# -- Compiling module stimulus
+# Start time: 22:12:27 on Jan 27,2024
+# vlog -reportprogress 300 regfile.sv regfile_tb.sv 
+# -- Compiling module regfile
+# ** Warning: regfile.sv(5): (vlog-13314) Defaulting port 'rf' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+# -- Compiling module testbench
 # 
 # Top level modules:
-# 	stimulus
-# End time: 16:46:07 on Jan 27,2024, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# vsim -voptargs="+acc" work.stimulus 
-# Start time: 16:46:08 on Jan 27,2024
+# 	testbench
+# End time: 22:12:27 on Jan 27,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 1
+# vsim -voptargs="+acc" work.testbench 
+# Start time: 22:12:27 on Jan 27,2024
 # ** Note: (vsim-3812) Design is being optimized...
-# ** Note: (vopt-143) Recognized 1 FSM in module "FSM(fast)".
+# ** Warning: regfile.sv(5): (vopt-13314) Defaulting port 'rf' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
 # Loading sv_std.std
-# Loading work.stimulus(fast)
-# Loading work.FSM(fast)
+# Loading work.testbench(fast)
+# Loading work.regfile(fast)
 # .main_pane.list.interior.cs.body
 # .main_pane.wave.interior.cs.body.pw.wf
 # ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
 #           File in use by: tyler  Hostname: DESKTOP-TT232T9  ProcessID: 18852
-#           Attempting to use alternate WLF file "./wlfti59mxq".
+#           Attempting to use alternate WLF file "./wlftnd41ts".
 # ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlfti59mxq
-# End time: 17:21:07 on Jan 27,2024, Elapsed time: 0:34:59
-# Errors: 0, Warnings: 2
+#           Using alternate file: ./wlftnd41ts
+# End time: 22:12:47 on Jan 27,2024, Elapsed time: 0:00:20
+# Errors: 0, Warnings: 3
