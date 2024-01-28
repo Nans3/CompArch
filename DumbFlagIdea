@@ -1,0 +1,61 @@
+module regfile (input logic         clk, 
+		input logic 	    we3, 
+		input logic [4:0]   ra1, ra2, wa3, 
+		input logic [31:0]  wd3, 
+    input logic [31:0] 		    erf[31:0],
+		output logic [31:0] rd1, rd2);
+   
+    logic [31:0] rf[31:0];
+
+  //  initial begin
+    // rf[31:0] <= erf[31:0];
+  //  end
+   
+   // three ported register file
+   // read two ports combinationally
+   // write third port on rising edge of clock
+   // register 0 hardwired to 0
+   bool flag = true;
+   always_ff @ (posedge clk) 
+     begin
+        rf[5'b00000] <= (we3 == 1'b1 && wa3 == 5'b00000) ? ((flag) ? erf[5'b00000] : wd3 ) : ((flag) ? erf[5'b00000] : rf[5'b00000]);
+        rf[5'b00001] <= (we3 == 1'b1 && wa3 == 5'b00001) ? ((flag) ? erf[5'b00001] : wd3 ) : ((flag) ? erf[5'b00001] : rf[5'b00001]);
+        rf[5'b00010] <= (we3 == 1'b1 && wa3 == 5'b00010) ? ((flag) ? erf[5'b00010] : wd3 ) : ((flag) ? erf[5'b00010] : rf[5'b00010]);
+        rf[5'b00011] <= (we3 == 1'b1 && wa3 == 5'b00011) ? ((flag) ? erf[5'b00011] : wd3 ) : ((flag) ? erf[5'b00011] : rf[5'b00011]);
+        rf[5'b00100] <= (we3 == 1'b1 && wa3 == 5'b00100) ? ((flag) ? erf[5'b00100] : wd3 ) : ((flag) ? erf[5'b00100] : rf[5'b00100]);
+        rf[5'b00101] <= (we3 == 1'b1 && wa3 == 5'b00101) ? ((flag) ? erf[5'b00101] : wd3 ) : ((flag) ? erf[5'b00101] : rf[5'b00101]);
+        rf[5'b00110] <= (we3 == 1'b1 && wa3 == 5'b00110) ? ((flag) ? erf[5'b00110] : wd3 ) : ((flag) ? erf[5'b00110] : rf[5'b00110]);
+        rf[5'b00111] <= (we3 == 1'b1 && wa3 == 5'b00111) ? ((flag) ? erf[5'b00111] : wd3 ) : ((flag) ? erf[5'b00111] : rf[5'b00111]);
+        rf[5'b01000] <= (we3 == 1'b1 && wa3 == 5'b01000) ? ((flag) ? erf[5'b01000] : wd3 ) : ((flag) ? erf[5'b01000] : rf[5'b01000]);
+        rf[5'b01001] <= (we3 == 1'b1 && wa3 == 5'b01001) ? ((flag) ? erf[5'b01001] : wd3 ) : ((flag) ? erf[5'b01001] : rf[5'b01001]);
+        rf[5'b01010] <= (we3 == 1'b1 && wa3 == 5'b01010) ? ((flag) ? erf[5'b01010] : wd3 ) : ((flag) ? erf[5'b01010] : rf[5'b01010]);
+        rf[5'b01011] <= (we3 == 1'b1 && wa3 == 5'b01011) ? ((flag) ? erf[5'b01011] : wd3 ) : ((flag) ? erf[5'b01011] : rf[5'b01011]);
+        rf[5'b01100] <= (we3 == 1'b1 && wa3 == 5'b01100) ? ((flag) ? erf[5'b01100] : wd3 ) : ((flag) ? erf[5'b01100] : rf[5'b01100]);
+        rf[5'b01101] <= (we3 == 1'b1 && wa3 == 5'b01101) ? ((flag) ? erf[5'b01101] : wd3 ) : ((flag) ? erf[5'b01101] : rf[5'b01101]);
+        rf[5'b01110] <= (we3 == 1'b1 && wa3 == 5'b01110) ? ((flag) ? erf[5'b01110] : wd3 ) : ((flag) ? erf[5'b01110] : rf[5'b01110]);
+        rf[5'b01111] <= (we3 == 1'b1 && wa3 == 5'b01111) ? ((flag) ? erf[5'b01111] : wd3 ) : ((flag) ? erf[5'b01111] : rf[5'b01111]);
+        rf[5'b10000] <= (we3 == 1'b1 && wa3 == 5'b10000) ? ((flag) ? erf[5'b10000] : wd3 ) : ((flag) ? erf[5'b10000] : rf[5'b10000]);
+        rf[5'b10001] <= (we3 == 1'b1 && wa3 == 5'b10001) ? ((flag) ? erf[5'b10001] : wd3 ) : ((flag) ? erf[5'b10001] : rf[5'b10001]);
+        rf[5'b10010] <= (we3 == 1'b1 && wa3 == 5'b10010) ? ((flag) ? erf[5'b10010] : wd3 ) : ((flag) ? erf[5'b10010] : rf[5'b10010]);
+        rf[5'b10011] <= (we3 == 1'b1 && wa3 == 5'b10011) ? ((flag) ? erf[5'b10011] : wd3 ) : ((flag) ? erf[5'b10011] : rf[5'b10011]);
+        rf[5'b10100] <= (we3 == 1'b1 && wa3 == 5'b10100) ? ((flag) ? erf[5'b10100] : wd3 ) : ((flag) ? erf[5'b10100] : rf[5'b10100]);
+        rf[5'b10101] <= (we3 == 1'b1 && wa3 == 5'b10101) ? ((flag) ? erf[5'b10101] : wd3 ) : ((flag) ? erf[5'b10101] : rf[5'b10101]);
+        rf[5'b10110] <= (we3 == 1'b1 && wa3 == 5'b10110) ? ((flag) ? erf[5'b10110] : wd3 ) : ((flag) ? erf[5'b10110] : rf[5'b10110]);
+        rf[5'b10111] <= (we3 == 1'b1 && wa3 == 5'b10111) ? ((flag) ? erf[5'b10111] : wd3 ) : ((flag) ? erf[5'b10111] : rf[5'b10111]);
+        rf[5'b11000] <= (we3 == 1'b1 && wa3 == 5'b11000) ? ((flag) ? erf[5'b11000] : wd3 ) : ((flag) ? erf[5'b11000] : rf[5'b11000]);
+        rf[5'b11001] <= (we3 == 1'b1 && wa3 == 5'b11001) ? ((flag) ? erf[5'b11001] : wd3 ) : ((flag) ? erf[5'b11001] : rf[5'b11001]);
+        rf[5'b11010] <= (we3 == 1'b1 && wa3 == 5'b11010) ? ((flag) ? erf[5'b11010] : wd3 ) : ((flag) ? erf[5'b11010] : rf[5'b11010]);
+        rf[5'b11011] <= (we3 == 1'b1 && wa3 == 5'b11011) ? ((flag) ? erf[5'b11011] : wd3 ) : ((flag) ? erf[5'b11011] : rf[5'b11011]);
+        rf[5'b11100] <= (we3 == 1'b1 && wa3 == 5'b11100) ? ((flag) ? erf[5'b11100] : wd3 ) : ((flag) ? erf[5'b11100] : rf[5'b11100]);
+        rf[5'b11101] <= (we3 == 1'b1 && wa3 == 5'b11101) ? ((flag) ? erf[5'b11101] : wd3 ) : ((flag) ? erf[5'b11101] : rf[5'b11101]);
+        rf[5'b11110] <= (we3 == 1'b1 && wa3 == 5'b11110) ? ((flag) ? erf[5'b11110] : wd3 ) : ((flag) ? erf[5'b11110] : rf[5'b11110]);
+        rf[5'b11111] <= (we3 == 1'b1 && wa3 == 5'b11111) ? ((flag) ? erf[5'b11111] : wd3 ) : ((flag) ? erf[5'b11111] : rf[5'b11111]);
+        if(flag){
+            flag = false;
+        }
+     end
+
+   assign rd1 = rf[ra1];
+   assign rd2 = rf[ra2];
+      
+endmodule // regfile
