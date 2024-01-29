@@ -17,30 +17,20 @@
 # ** Warning: (vlib-34) Library already exists at "work".
 # Errors: 0, Warnings: 1
 # Model Technology ModelSim SE-64 vlog 2021.3 Compiler 2021.07 Jul 13 2021
-# Start time: 22:12:27 on Jan 27,2024
+# Start time: 11:36:00 on Jan 29,2024
 # vlog -reportprogress 300 regfile.sv regfile_tb.sv 
 # -- Compiling module regfile
-# ** Warning: regfile.sv(5): (vlog-13314) Defaulting port 'rf' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
 # -- Compiling module testbench
-# 
-# Top level modules:
-# 	testbench
-# End time: 22:12:27 on Jan 27,2024, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 1
-# vsim -voptargs="+acc" work.testbench 
-# Start time: 22:12:27 on Jan 27,2024
-# ** Note: (vsim-3812) Design is being optimized...
-# ** Warning: regfile.sv(5): (vopt-13314) Defaulting port 'rf' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
-# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
-# Loading sv_std.std
-# Loading work.testbench(fast)
-# Loading work.regfile(fast)
-# .main_pane.list.interior.cs.body
-# .main_pane.wave.interior.cs.body.pw.wf
-# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
-#           File in use by: tyler  Hostname: DESKTOP-TT232T9  ProcessID: 18852
-#           Attempting to use alternate WLF file "./wlftnd41ts".
-# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlftnd41ts
-# End time: 22:12:47 on Jan 27,2024, Elapsed time: 0:00:20
-# Errors: 0, Warnings: 3
+# ** Error: (vlog-13069) regfile_tb.sv(84): near "=": syntax error, unexpected '=', expecting ++ or --.
+# ** Error: (vlog-13069) regfile_tb.sv(90): near "#": syntax error, unexpected '#'.
+# ** Error: regfile_tb.sv(93): 'i' is an invalid type in Generate loop. Must be a genvar.
+# ** Error (suppressible): regfile_tb.sv(94): (vlog-2720) A generate begin/end pair has been found outside of generate construct.
+# ** Error: (vlog-13069) regfile_tb.sv(94): near "=": syntax error, unexpected '='.
+# ** Error: regfile_tb.sv(94): (vlog-13205) Syntax error found in the scope following 'ra1'. Is there a missing '::'?
+# End time: 11:36:00 on Jan 29,2024, Elapsed time: 0:00:00
+# Errors: 6, Warnings: 0
+# ** Error: C:/modeltech64_2021.3/win64/vlog failed.
+# Error in macro ./regfile.do line 30
+# C:/modeltech64_2021.3/win64/vlog failed.
+#     while executing
+# "vlog regfile.sv regfile_tb.sv"

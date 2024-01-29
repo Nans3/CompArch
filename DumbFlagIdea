@@ -18,7 +18,7 @@ module regfile (input logic         clk,
    bool flag = true;
    always_ff @ (posedge clk) 
      begin
-        //rf[5'b00000] <= (we3 == 1'b1 && wa3 == 5'b00000) ? ((flag) ? erf[5'b00000] : wd3 ) : ((flag) ? erf[5'b00000] : rf[5'b00000]);
+        rf[5'b00000] <= (we3 == 1'b1 && wa3 == 5'b00000) ? ((flag) ? erf[5'b00000] : wd3 ) : ((flag) ? erf[5'b00000] : rf[5'b00000]);
         rf[5'b00001] <= (we3 == 1'b1 && wa3 == 5'b00001) ? ((flag) ? erf[5'b00001] : wd3 ) : ((flag) ? erf[5'b00001] : rf[5'b00001]);
         rf[5'b00010] <= (we3 == 1'b1 && wa3 == 5'b00010) ? ((flag) ? erf[5'b00010] : wd3 ) : ((flag) ? erf[5'b00010] : rf[5'b00010]);
         rf[5'b00011] <= (we3 == 1'b1 && wa3 == 5'b00011) ? ((flag) ? erf[5'b00011] : wd3 ) : ((flag) ? erf[5'b00011] : rf[5'b00011]);

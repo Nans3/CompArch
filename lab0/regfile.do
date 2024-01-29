@@ -35,24 +35,24 @@ vsim -voptargs=+acc work.testbench
 view list
 view wave
 
--- display input and output signals as hexidecimal values
+-- display input and output signals as binidecimal values
 # Diplays All Signals recursively
-add wave -hex -r /testbench/*
+add wave -bin -r /testbench/*
 
 # Adapt to make Waveform Viewer prettier :)
 #add wave -noupdate -divider -height 32 "MIPS Datapath"
-#add wave -hex /testbench/dut/mips/dp/*
+#add wave -bin /testbench/dut/mips/dp/*
 #add wave -noupdate -divider -height 32 "MIPS Control"
-#add wave -hex /testbench/dut/mips/c/*
+#add wave -bin /testbench/dut/mips/c/*
 #add wave -noupdate -divider -height 32 "Instruction Memory"
-#add wave -hex /testbench/dut/imem/*
+#add wave -bin /testbench/dut/imem/*
 #add wave -noupdate -divider -height 32 "Data Memory (Storage)"
-#add wave -hex /testbench/dut/dmem/*
+#add wave -bin /testbench/dut/dmem/*
 #add wave -noupdate -divider -height 32 "Register File"
-#add wave -hex /testbench/dut/mips/dp/rf/*
-#add wave -hex /testbench/dut/mips/dp/rf/rf
-#add list -hex -r /testbench/*
-#add log -hex -r /*
+#add wave -bin /testbench/dut/mips/dp/rf/*
+#add wave -bin /testbench/dut/mips/dp/rf/rf
+#add list -bin -r /testbench/*
+#add log -bin -r /*
 
 -- Set Wave Output Items 
 TreeUpdate [SetDefaultTree]

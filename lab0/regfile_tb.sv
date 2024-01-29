@@ -2,11 +2,13 @@ module testbench ();
    
 // Declares signals for interfacing with regfile modules
     logic clock;
-    logic [4:0]   ra1, ra2;
-    logic [31:0] rd1, rd2;
+    logic we3;
+    logic [4:0]   ra1, ra2, wa3;
+    logic [31:0] rd1, rd2, wd3;
    
    integer handle3;
    integer desc3;
+   integer i;
 
     logic [31:0] RefReg[31:0];
     assign RefReg[5'b00000] = 32'b00000000000000000000000000000000;
@@ -44,7 +46,7 @@ module testbench ();
 
 
    // Instantiate DUT
-   regfile dut (clock,1'b0,ra1,ra2,5'b00000,32'b01111110111001110000100000011101,RefReg,rd1, rd2);
+   regfile dut (clock,we3,ra1,ra2,wa3,wd3,rd1, rd2);
 
    // Setup the clock to toggle every 1 time units 
    initial 
@@ -69,17 +71,30 @@ module testbench ();
 
    end   
    
-   initial 
-     begin      
-	#0  ra1 = 5'b0;
-	#0  ra2 = 5'b11110;
-	#22 ra1 = 5'b11110;
-	#0 ra2 = 5'b0;
-	// #12 reset_b = 1'b1;	
-	// #0  In = 1'b0;
-	// #20 In = 1'b1;
-	// #20 In = 1'b0;
+   initial begin
+      we3 = 1'b0; // Initialize write enable
+      ra1 = 5'b0; // Initialize read addresses
+      ra2 = 5'b0;
+      wa3 = 5'b0; // Initialize write address
+      wd3 = 32'b0; // Initialize data to write
+
+      #3 we3 = 1'b1; // Set write enable high after 3 time units
+
+      // Write data to register file
+      for (i = 0; i < 32; i = i=i+1) begin
+         wa3 = i;
+         wd3 = RefReg[i];
+         #2;
+      end
+
+      #3 we3 = 1'b0; // Set write enable low
+
+      // Read data from register file
+      for (i = 0; i < 32; i++) begin
+         ra1 = i;
+         #1; // You may need a delay here to observe the output
      end
+   end
 
 endmodule // regfile
 
