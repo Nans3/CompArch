@@ -18,9 +18,9 @@ module regfile (input logic         clk,
 
    always_ff @ (posedge clk) 
     begin
-      if (we3 && wa3 != 5'b0) rf[wa3] <= wd3;
+      if(we3) rf[wa3] <= (wa3 != 5'b0) ? wd3 : 32'b0; 
     end
-
+   
    assign rd1 = rf[ra1];
    assign rd2 = rf[ra2];
       

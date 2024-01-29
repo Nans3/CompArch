@@ -35,7 +35,7 @@ vsim -voptargs=+acc work.testbench
 view list
 view wave
 
--- display input and output signals as binidecimal values
+-- display input and output signals as binary values
 # Diplays All Signals recursively
 add wave -bin -r /testbench/*
 
