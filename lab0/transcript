@@ -14,20 +14,21 @@
 # do regfile.do
 # ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is tyler@DESKTOP-TT232T9.
 # ** Warning: (vdel-134) Unable to remove locked optimized design "_opt1".  Locker is tyler@DESKTOP-TT232T9.
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt2".  Locker is tyler@DESKTOP-TT232T9.
 # ** Warning: (vlib-34) Library already exists at "work".
 # Errors: 0, Warnings: 1
 # Model Technology ModelSim SE-64 vlog 2021.3 Compiler 2021.07 Jul 13 2021
-# Start time: 13:05:19 on Jan 29,2024
+# Start time: 00:02:57 on Jan 30,2024
 # vlog -reportprogress 300 regfile.sv regfile_tb.sv 
 # -- Compiling module regfile
 # -- Compiling module testbench
 # 
 # Top level modules:
 # 	testbench
-# End time: 13:05:19 on Jan 29,2024, Elapsed time: 0:00:00
+# End time: 00:02:57 on Jan 30,2024, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vsim -voptargs="+acc" work.testbench 
-# Start time: 13:05:19 on Jan 29,2024
+# Start time: 00:02:57 on Jan 30,2024
 # ** Note: (vsim-3812) Design is being optimized...
 # Loading sv_std.std
 # Loading work.testbench(fast)
@@ -36,6 +37,72 @@
 # .main_pane.wave.interior.cs.body.pw.wf
 # ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
 #           File in use by: tyler  Hostname: DESKTOP-TT232T9  ProcessID: 18852
-#           Attempting to use alternate WLF file "./wlfth47cys".
+#           Attempting to use alternate WLF file "./wlftrfidbx".
 # ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlfth47cys
+#           Using alternate file: ./wlftrfidbx
+# ** Warning: (vsim-PLI-3409) Illegal binary digit ''' in data on line 33 of file "regfile.tv".    : regfile_tb.sv(28)
+#    Time: 0 ns  Iteration: 0  Instance: /testbench
+# ** Warning: (vsim-PLI-3409) Illegal binary digit 'b' in data on line 33 of file "regfile.tv".    : regfile_tb.sv(28)
+#    Time: 0 ns  Iteration: 0  Instance: /testbench
+# Error: inputs = 1_00000_00000_00000_00000000000000000111111110010100
+# Error: outputs rd1 = 00000000000000000000000000000000 (00000000000000000111111110010100 expected)
+# Error: rd2 = 00000000000000000000000000000000 (00000000000000000111111110010100 expected)
+# 
+# 
+# Error: inputs = 1_00001_00001_00001_00000000000000000111111110010100
+# Error: outputs rd1 = 00000000000000000000000000000001 (00000000000000000111111110010100 expected)
+# Error: rd2 = 00000000000000000000000000000001 (00000000000000000111111110010100 expected)
+# 
+# 
+# Error: inputs = 1_00010_00010_00010_00000000000000000111111110010100
+# Error: outputs rd1 = 00000000000000000000000000000001 (00000000000000000111111110010100 expected)
+# Error: rd2 = 00000000000000000000000000000001 (00000000000000000111111110010100 expected)
+# 
+# 
+# Error: inputs = 1_00011_00011_00011_00000000000000000111111110010100
+# Error: outputs rd1 = 00000000000000000000000000000001 (00000000000000000111111110010100 expected)
+# Error: rd2 = 00000000000000000000000000000001 (00000000000000000111111110010100 expected)
+# 
+# 
+# Error: inputs = 1_00100_00100_00100_00000000000000000111111110010100
+# Error: outputs rd1 = 00000000000000000000000000000001 (00000000000000000111111110010100 expected)
+# Error: rd2 = 00000000000000000000000000000001 (00000000000000000111111110010100 expected)
+# 
+# 
+# Error: inputs = 1_00101_00101_00101_00000000000000000111111110010100
+# Error: outputs rd1 = 00000000000000000000000000000001 (00000000000000000111111110010100 expected)
+# Error: rd2 = 00000000000000000000000000000001 (00000000000000000111111110010100 expected)
+# 
+# 
+# Error: inputs = 1_00110_00110_00110_00000000000000000111111110010100
+# Error: outputs rd1 = 00000000000000000000000000000001 (00000000000000000111111110010100 expected)
+# Error: rd2 = 00000000000000000000000000000001 (00000000000000000111111110010100 expected)
+# 
+# 
+# Error: inputs = 1_00111_00111_00111_00000000000000000111111110010100
+# Error: outputs rd1 = 00000000000000000000000000000001 (00000000000000000111111110010100 expected)
+# Error: rd2 = 00000000000000000000000000000001 (00000000000000000111111110010100 expected)
+# 
+# 
+# Error: inputs = 1_01000_01000_01000_00000000000000000111111110010100
+# Error: outputs rd1 = 00000000000000000000000000000001 (00000000000000000111111110010100 expected)
+# Error: rd2 = 00000000000000000000000000000001 (00000000000000000111111110010100 expected)
+# 
+# 
+# Error: inputs = 1_01001_01001_01001_00000000000000000111111110010100
+# Error: outputs rd1 = 00000000000000000000000000000001 (00000000000000000111111110010100 expected)
+# Error: rd2 = 00000000000000000000000000000001 (00000000000000000111111110010100 expected)
+# 
+# 
+# Error: inputs = 1_01010_01010_01010_00000000000000000111111110010100
+# Error: outputs rd1 = 00000000000000000000000000000001 (00000000000000000111111110010100 expected)
+# Error: rd2 = 00000000000000000000000000000001 (00000000000000000111111110010100 expected)
+# 
+# 
+# Error: inputs = 1_01011_01011_01011_00000000000000000111111110010100
+# Error: outputs rd1 = 00000000000000000000000000000001 (00000000000000000111111110010100 expected)
+# Error: rd2 = 00000000000000000000000000000001 (00000000000000000111111110010100 expected)
+# 
+# 
+# End time: 00:04:14 on Jan 30,2024, Elapsed time: 0:01:17
+# Errors: 0, Warnings: 4

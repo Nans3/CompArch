@@ -37,7 +37,7 @@ view wave
 
 -- display input and output signals as binary values
 # Diplays All Signals recursively
-add wave -bin -r /testbench/*
+add wave -uns -r /testbench/*
 
 # Adapt to make Waveform Viewer prettier :)
 #add wave -noupdate -divider -height 32 "MIPS Datapath"
