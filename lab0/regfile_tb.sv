@@ -52,6 +52,7 @@ always @(negedge clock)
 			$display("Error: outputs rd1 = %b (%b expected)\nError: rd2 = %b (%b expected)\n\n",rd1, rd1expected, rd2, rd2expected);
 			errors = errors + 1;
 		end
+		
 		if (vectornum >= 31) begin
 			$display("%d tests completed with %d errors", vectornum+1, errors);
 			$stop;
