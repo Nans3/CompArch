@@ -70,6 +70,7 @@ int r_process(char* i_) {
   char rs2[6]; rs2[5] = '\0';
   char rd[6]; rd[5] = '\0';
   char funct3[4]; funct3[3] = '\0';
+  char funct7[8]; funct7[7] = '\0';
   for(int i = 0; i < 5; i++) {
     rs1[i] = i_[31-19+i];
     rs2[i] = i_[31-24+i];            
@@ -77,6 +78,9 @@ int r_process(char* i_) {
   }
   for(int i = 0; i < 3; i++) {
     funct3[i] = i_[31-14+i];
+  }
+  for(int i = 0; i < 7; i++) {
+    funct7[i] = i_[25+i];
   }
   int Rs1 = bchar_to_int(rs1);
   int Rs2 = bchar_to_int(rs2);		   
@@ -87,10 +91,61 @@ int r_process(char* i_) {
   printf("\n");
 
   /* Example - use and replicate */
-  if(!strcmp(d_opcode,"0110011")) {
-    printf("--- This is an ADD instruction. \n");
-    ADD(Rd, Rs1, Rs2, Funct3);
-    return 0;
+  if(!strcmp(d_opcode,"0110011")) {//Is R Type?
+    if(!strcmp(funct3,"000")) {
+      if(!strcmp(funct7,"0000000")) {//Is ADD?
+        printf("--- This is an ADD instruction. \n");
+        ADD(Rd, Rs1, Rs2, Funct3);
+        return 0;
+      }
+      if(!strcmp(funct7,"0000001")) {//Is SUB
+        printf("--- This is a SUB instruction. \n");
+        SUB(Rd, Rs1, Rs2, Funct3);
+        return 0;
+      }
+    }
+    if(!strcmp(funct3,"001")) {
+      printf("--- This is a SLL instruction. \n");
+      SLL(Rd, Rs1, Rs2, Funct3);
+      return 0;
+    }
+    if(!strcmp(funct3,"010")) {
+      printf("--- This is a SLT instruction. \n");
+      SLT(Rd, Rs1, Rs2, Funct3);
+      return 0;
+    }
+    if(!strcmp(funct3,"011")) {
+      printf("--- This is a SLTU instruction. \n");
+      SLTU(Rd, Rs1, Rs2, Funct3);
+      return 0;
+    }
+    if(!strcmp(funct3,"100")) {
+      printf("--- This is a XOR instruction. \n");
+      XOR(Rd, Rs1, Rs2, Funct3);
+      return 0;
+    }
+    if(!strcmp(funct3,"101")) {
+      if(!strcmp(funct7,"0000000")) {
+        printf("--- This is a SRL instruction. \n");
+        SRL(Rd, Rs1, Rs2, Funct3);
+        return 0;
+      }
+      if(!strcmp(funct7,"0100000")) {
+        printf("--- This is a SRA instruction. \n");
+        SRA(Rd, Rs1, Rs2, Funct3);
+        return 0;
+      }
+    }     
+    if(!strcmp(funct3,"110")) {
+      printf("--- This is a OR instruction. \n");
+      OR(Rd, Rs1, Rs2, Funct3);
+      return 0;
+    }
+    if(!strcmp(funct3,"111")) {
+      printf("--- This is a AND instruction. \n");
+      AND(Rd, Rs1, Rs2, Funct3);
+      return 0;
+    }
   }
 
   /* Add other data instructions here */ 
@@ -133,8 +188,14 @@ int i_process(char* i_) {
 
   /* Add other imm instructions here */ 
 
-    
+
   /* This is an Add Immediate Instruciton */
+  if(!strcmp(d_opcode,"0010011")) {
+    printf("--- This is an ADDI instruction. \n");
+    ADDI(Rd, Rs1, Imm, Funct3);
+    return 0;
+  }	  
+  
   if(!strcmp(d_opcode,"0010011")) {
     printf("--- This is an ADDI instruction. \n");
     ADDI(Rd, Rs1, Imm, Funct3);
