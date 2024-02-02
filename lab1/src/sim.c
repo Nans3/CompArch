@@ -133,6 +133,7 @@ int i_process(char* i_) {
 
   /* Add other imm instructions here */ 
 
+    
   /* This is an Add Immediate Instruciton */
   if(!strcmp(d_opcode,"0010011")) {
     printf("--- This is an ADDI instruction. \n");

@@ -97,6 +97,13 @@ R0
 R0
 R0
 R0
+R0
+R0
+R0
+R0
+R0
+R0
+R0
 !s11f vlog 2021.3 2021.07, Jul 13 2021
 13
 !s112 1.1
@@ -139,10 +146,10 @@ n@_opt2
 R6
 R1
 T_opt3
-!s110 1706594578
-VlLQMM=`V0GU5gINo=hG@L2
+!s110 1706912117
+V8FFbI__hocTG;Xn=Igi`[2
 R7
-=1-60189533ffe9-65b89112-a8-38ac
+=1-00be43900f6f-65bd6975-a9-5464
 R3
 R4
 R5
@@ -150,27 +157,27 @@ n@_opt3
 R6
 vregfile
 Z8 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
-Z9 !s110 1706594577
+Z9 !s110 1706912116
 !i10b 1
-!s100 a6<@aPm]ig49B@`CRT8Gb3
-I:9e5>FTTfK>nl9j7>:bD;1
+!s100 D48n>JMNDZz>?80D?G^^d1
+IJiWaJfj4B^[T81nz7Fn2L0
 S1
-R1
-w1706594556
+Z10 dC:/Users/calseab/Documents/GitHub/CompArch/lab0
+w1706912056
 8regfile.sv
 Fregfile.sv
 !i122 0
 L0 1 27
-Z10 VDg1SIo80bB@j0V0VzS_@n1
-Z11 OL;L;2021.3;73
+Z11 VDg1SIo80bB@j0V0VzS_@n1
+Z12 OL;L;2021.3;73
 r1
 !s85 0
 31
-Z12 !s108 1706594577.000000
-Z13 !s107 regfile_tb.sv|regfile.sv|
-Z14 !s90 -reportprogress|300|regfile.sv|regfile_tb.sv|
+Z13 !s108 1706912116.000000
+Z14 !s107 regfile_tb.sv|regfile.sv|
+Z15 !s90 -reportprogress|300|regfile.sv|regfile_tb.sv|
 !i113 0
-Z15 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z16 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
 R5
 vtestbench
 R8
@@ -179,20 +186,20 @@ R9
 !s100 V]96c5iUQMfI7fTLQe;Rg1
 I33>0TPRzf9e=Ah5U7IPW83
 S1
-R1
-w1706594570
+R10
+w1706912055
 8regfile_tb.sv
 Fregfile_tb.sv
 !i122 0
 L0 1 64
-R10
 R11
+R12
 r1
 !s85 0
 31
-R12
 R13
 R14
-!i113 0
 R15
+!i113 0
+R16
 R5
