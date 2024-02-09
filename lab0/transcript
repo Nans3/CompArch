@@ -15,20 +15,21 @@
 # ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is tyler@DESKTOP-TT232T9.
 # ** Warning: (vdel-134) Unable to remove locked optimized design "_opt1".  Locker is tyler@DESKTOP-TT232T9.
 # ** Warning: (vdel-134) Unable to remove locked optimized design "_opt2".  Locker is tyler@DESKTOP-TT232T9.
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt3".  Locker is calseab@CEAT-ENDV350-04.
 # ** Warning: (vlib-34) Library already exists at "work".
 # Errors: 0, Warnings: 1
 # Model Technology ModelSim SE-64 vlog 2021.3 Compiler 2021.07 Jul 13 2021
-# Start time: 16:34:04 on Feb 02,2024
+# Start time: 15:41:03 on Feb 09,2024
 # vlog -reportprogress 300 regfile.sv regfile_tb.sv 
 # -- Compiling module regfile
 # -- Compiling module testbench
 # 
 # Top level modules:
 # 	testbench
-# End time: 16:34:05 on Feb 02,2024, Elapsed time: 0:00:01
+# End time: 15:41:03 on Feb 09,2024, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vsim -voptargs="+acc" work.testbench 
-# Start time: 16:34:05 on Feb 02,2024
+# Start time: 15:41:03 on Feb 09,2024
 # ** Note: (vsim-3812) Design is being optimized...
 # Loading sv_std.std
 # Loading work.testbench(fast)
@@ -37,10 +38,12 @@
 # .main_pane.wave.interior.cs.body.pw.wf
 # ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
 #           File in use by: tyler  Hostname: DESKTOP-TT232T9  ProcessID: 18852
-#           Attempting to use alternate WLF file "./wlft0jte3c".
+#           Attempting to use alternate WLF file "./wlftryawj1".
 # ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlft0jte3c
+#           Using alternate file: ./wlftryawj1
 #          32 tests completed with          0 errors
 # ** Note: $stop    : regfile_tb.sv(58)
 #    Time: 315 ns  Iteration: 1  Instance: /testbench
 # Break in Module testbench at regfile_tb.sv line 58
+# End time: 15:41:56 on Feb 09,2024, Elapsed time: 0:00:53
+# Errors: 0, Warnings: 2

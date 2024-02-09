@@ -186,22 +186,104 @@ int i_process(char* i_) {
 	  d_opcode, Rs1, Imm, Rd, Funct3);
   printf("\n");
 
-  /* Add other imm instructions here */ 
+  /* Add other imm instructions here  
+  if(Funct3 == 0){
+    printf("--- This is an LB instruction. \n");
+    LB(Rd, Rs1, Imm, Funct3);
+    return 0;
+  }
+*********************/
+
+
+if(!strcmp(d_opcode,"0000011")){
+  if(Funct3 == 0){
+    printf("--- This is an LB instruction. \n");
+    LB(Rd, Rs1, Imm, Funct3);
+    return 0;
+  }
+
+  if(Funct3 == 1){
+      printf("--- This is an LH instruction. \n");
+      LH(Rd, Rs1, Imm, Funct3);
+      return 0;
+  }
+
+  if(Funct3 == 2){
+      printf("--- This is an LW instruction. \n");
+      LW(Rd, Rs1, Imm, Funct3);
+      return 0;
+  }
+
+  if(Funct3 == 3){
+      printf("--- This is an LBU instruction. \n");
+      LBU(Rd, Rs1, Imm, Funct3);
+      return 0;
+  }
+
+  if(Funct3 == 4){
+      printf("--- This is an LHU instruction. \n");
+      LHU(Rd, Rs1, Imm, Funct3);
+      return 0;
+  }
+}
+// *********************
+
+  // Q1: Why Funct7 for SRLI & SRAI?
+  // Q2: How to implement uimm? (Make new one?)
+  // S functions?
+  // Last I function?
 
 
   /* This is an Add Immediate Instruciton */
   if(!strcmp(d_opcode,"0010011")) {
-    printf("--- This is an ADDI instruction. \n");
-    ADDI(Rd, Rs1, Imm, Funct3);
+    if(Funct3 == 0) {
+      printf("--- This is an ADDI instruction. \n");
+      ADDI(Rd, Rs1, Imm, Funct3);
     return 0;
-  }	  
-  
-  if(!strcmp(d_opcode,"0010011")) {
-    printf("--- This is an ADDI instruction. \n");
-    ADDI(Rd, Rs1, Imm, Funct3);
+    }
+    if(Funct3 == 1) {
+      printf("--- This is an SLLI instruction. \n");
+      SLLI(Rd, Rs1, Imm, Funct3);
     return 0;
-  }	  
+    }
+    if(Funct3 == 2) {
+      printf("--- This is an SLTI instruction. \n");
+      SLTI(Rd, Rs1, Imm, Funct3);
+    return 0;
+    }
+    if(Funct3 == 3) {
+      printf("--- This is an SLTIU instruction. \n");
+      SLTIU(Rd, Rs1, Imm, Funct3);
+    return 0;
+    }
+    if(Funct3 == 4) {
+      printf("--- This is an XORI instruction. \n");
+      XORI(Rd, Rs1, Imm, Funct3);
+    return 0;
+    }
+    if(Funct3 == 5) {
+      printf("--- This is an SRLI instruction. \n");
+      SRLI(Rd, Rs1, Imm, Funct3);
+    return 0;
 
+    printf("--- This is an SRAI instruction. \n");
+      SRAI(Rd, Rs1, Imm, Funct3);
+      return 0;
+    }
+    if(Funct3 == 6) {
+      printf("--- This is an ORI instruction. \n");
+      ORI(Rd, Rs1, Imm, Funct3);
+    return 0;
+    }
+    if(Funct3 == 7) {
+      printf("--- This is an ANDI instruction. \n");
+      ANDI(Rd, Rs1, Imm, Funct3);
+    return 0;
+    }
+  }
+
+  // **********************	  
+  
   return 1;	
 }
 
@@ -253,12 +335,42 @@ int b_process(char* i_) {
   printf("\n");    
 
   /* Add branch instructions here */
+  if(!strcmp(d_opcode,"1100011")){
+    if(Funct3 == 0){
+        printf("--- This is an BEQ instruction. \n");
+        BEQ(Rs1, Rs2, Label);
+        return 0;
+    }
 
-  /* This is an Add Immediate Instruciton */
-  if(!strcmp(d_opcode,"1100011")) {
-    printf("--- This is an BNE instruction. \n");
-    BNE(Rs1, Rs2, Imm, Funct3);
-    return 0;
+    if(Funct3 == 1){
+        printf("--- This is an BNE instruction. \n");
+        BNE(Rs1, Rs2, Label);
+        return 0;
+    }
+
+    if(Funct3 == 4){
+        printf("--- This is an BLT instruction. \n");
+        BLT(Rs1, Rs2, Label);
+        return 0;
+    }
+
+    if(Funct3 == 5){
+        printf("--- This is an BGE instruction. \n");
+        BGE(Rs1, Rs2, Label);
+        return 0;
+    }
+
+    if(Funct3 == 6){
+        printf("--- This is an BLTU instruction. \n");
+        BLTU(Rs1, Rs2, Label);
+        return 0;
+    }
+
+    if(Funct3 == 7){
+        printf("--- This is an BGEU instruction. \n");
+        BGEU(Rs1, Rs2, Label);
+        return 0;
+    }
   }	    
 
   return 1;

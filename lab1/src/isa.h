@@ -7,11 +7,13 @@
 /*                                                             */
 /***************************************************************/
 
+// OFFICE HOUR: ATRC 306 @ 1:30 PM Monday & try for whenever the rest of the week.
+
 #ifndef _SIM_ISA_H_
 #define _SIM_ISA_H_
 
 #include <stdio.h>
-#include <stdlib.h>
+#include <stdlib.h> 
 #include <string.h>
 #include "shell.h"
 
@@ -112,7 +114,7 @@ int AND (int Rd, int Rs1, int Rs2, int Funct3) {
 
 }
 
-int ADDI (int Rd, int Rs1, int Imm, int Funct3) {
+int ADDI(int Rd, int Rs1, int Imm, int Funct3) {
 
   int cur = 0;
   cur = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm,12);
@@ -120,6 +122,82 @@ int ADDI (int Rd, int Rs1, int Imm, int Funct3) {
   return 0;
 
 }
+
+// ***********
+
+int SLLI(int Rd, int Rs1, int Imm, int Funct3) {
+
+  int cur = 0;
+  cur = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm,12);
+  NEXT_STATE.REGS[Rd] = cur;
+  return 0;
+
+}
+
+int SLTI(int Rd, int Rs1, int Imm, int Funct3) {
+
+  int cur = 0;
+  cur = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm,12);
+  NEXT_STATE.REGS[Rd] = cur;
+  return 0;
+
+}
+
+int SLTIU(int Rd, int Rs1, int Imm, int Funct3) {
+
+  int cur = 0;
+  cur = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm,12);
+  NEXT_STATE.REGS[Rd] = cur;
+  return 0;
+
+}
+
+int XORI(int Rd, int Rs1, int Imm, int Funct3) {
+
+  int cur = 0;
+  cur = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm,12);
+  NEXT_STATE.REGS[Rd] = cur;
+  return 0;
+
+}
+
+int SRLI(int Rd, int Rs1, int Imm, int Funct3) {
+
+  int cur = 0;
+  cur = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm,12);
+  NEXT_STATE.REGS[Rd] = cur;
+  return 0;
+
+}
+
+int SRAI(int Rd, int Rs1, int Imm, int Funct3) {
+
+  int cur = 0;
+  cur = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm,12);
+  NEXT_STATE.REGS[Rd] = cur;
+  return 0;
+
+}
+
+int ORI(int Rd, int Rs1, int Imm, int Funct3) {
+
+  int cur = 0;
+  cur = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm,12);
+  NEXT_STATE.REGS[Rd] = cur;
+  return 0;
+
+}
+
+int ANDI(int Rd, int Rs1, int Imm, int Funct3) {
+
+  int cur = 0;
+  cur = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm,12);
+  NEXT_STATE.REGS[Rd] = cur;
+  return 0;
+
+}
+
+// ***********
 
 int BNE (int Rs1, int Rs2, int Imm, int Funct3) {
 
