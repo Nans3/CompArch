@@ -209,6 +209,64 @@ int BNE (int Rs1, int Rs2, int Imm, int Funct3) {
 
 }
 
+int  BEQ(int Rs1, int Rs2, int Label){
+  // FIL
+  return 0;
+}
+int  BNE(int Rs1, int Rs2, int Label){
+  // FIL
+  return 0;
+}
+int  BLT(int Rs1, int Rs2, int Label){
+  // FIL
+  return 0;
+}
+int  BGE(int Rs1, int Rs2, int Label){
+  // FIL
+  return 0;
+}
+int BLTU(int Rs1, int Rs2, int Label){
+  // FIL
+  return 0;
+}
+int BGEU(int Rs1, int Rs2, int Label){
+  // FIL
+  return 0;
+}
+
+int JAL(Rd, Label){
+  // FIL
+  return 0;
+}
+
+int JALR(Rd, Rs1, Imm){
+  // FIL
+  return 0;
+}
+
+int AUIPC(Rd, UpImm){
+  // FIL
+  return 0;
+}
+
+int LUI(Rd, UpImm){
+  // FIL
+  return 0;
+}
+
+int SB(Rs2, Rs1){
+  //FIL
+  return 0;
+}
+int SH(Rs2, Rs1){
+  //FIL
+  return 0;
+}
+int SW(Rs2, Rs1){
+  //FIL
+  return 0;
+}
+
 // I Instructions
 int LB (char* i_);
 int LH (char* i_);
