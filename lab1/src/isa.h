@@ -44,9 +44,7 @@ int SUB (int Rd, int Rs1, int Rs2, int Funct3) {
 
 int SLL (int Rd, int Rs1, int Rs2, int Funct3) {
 // ?
-  int cur = 0;
-  cur = CURRENT_STATE.REGS[Rs1] << CURRENT_STATE.REGS[Rs2][4:0];
-  NEXT_STATE.REGS[Rd] = cur;
+  NEXT_STATE.REGS[Rd] = CURRENT_STATE.REGS[Rs1] & 0x1f;
   return 0;
 
 }

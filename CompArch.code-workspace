@@ -1,0 +1,9 @@
+{
+	"folders": [
+		{
+			"uri": "vscode-remote://ssh-remote+gondor.ecen.okstate.edu/home/calseab/CompArch/CompArch"
+		}
+	],
+	"remoteAuthority": "ssh-remote+gondor.ecen.okstate.edu",
+	"settings": {}
+}
