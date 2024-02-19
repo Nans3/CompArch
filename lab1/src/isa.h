@@ -233,35 +233,35 @@ int BGEU(int Rs1, int Rs2, int Label){
   return 0;
 }
 
-int JAL(Rd, Label){
+int JAL(int Rd, int Label){
   // FIL
   return 0;
 }
 
-int JALR(Rd, Rs1, Imm){
+int JALR(int Rd, int Rs1, int Imm){
   // FIL
   return 0;
 }
 
-int AUIPC(Rd, UpImm){
+int AUIPC(int Rd, int UpImm){
   // FIL
   return 0;
 }
 
-int LUI(Rd, UpImm){
+int LUI(int Rd, int UpImm){
   // FIL
   return 0;
 }
 
-int SB(Rs2, Rs1){
+int SB(int Rs2, int Rs1){
   //FIL
   return 0;
 }
-int SH(Rs2, Rs1){
+int SH(int Rs2, int Rs1){
   //FIL
   return 0;
 }
-int SW(Rs2, Rs1){
+int SW(int Rs2, int Rs1){
   //FIL
   return 0;
 }
