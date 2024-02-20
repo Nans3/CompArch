@@ -210,37 +210,37 @@ int ANDI(int Rd, int Rs1, int Imm) {
 
 int  BEQ(int Rs1, int Rs2, int Imm){
   if(CURRENT_STATE.REGS[Rs1] == CURRENT_STATE.REGS[Rs2]){
-    NEXT_STATE.PC = CURRENT_STATE.PC+SIGNEXT((Imm<<1,13))-4;
+    NEXT_STATE.PC = CURRENT_STATE.PC+SIGNEXT(Imm<<1,13)-4;
   }
   return 0;
 }
 int  BNE(int Rs1, int Rs2, int Imm){
   if(CURRENT_STATE.REGS[Rs1] != CURRENT_STATE.REGS[Rs2]){
-    NEXT_STATE.PC = CURRENT_STATE.PC+SIGNEXT((Imm<<1,13))-4;
+    NEXT_STATE.PC = CURRENT_STATE.PC+SIGNEXT(Imm<<1,13)-4;
   }
   return 0;
 }
 int  BLT(int Rs1, int Rs2, int Imm){
   if((signed)CURRENT_STATE.REGS[Rs1] < (signed)CURRENT_STATE.REGS[Rs2]){
-    NEXT_STATE.PC = CURRENT_STATE.PC+SIGNEXT((Imm<<1,13))-4;
+    NEXT_STATE.PC = CURRENT_STATE.PC+SIGNEXT(Imm<<1,13)-4;
   }
   return 0;
 }
 int  BGE(int Rs1, int Rs2, int Imm){
   if((signed)CURRENT_STATE.REGS[Rs1] >= (signed)CURRENT_STATE.REGS[Rs2]){
-    NEXT_STATE.PC = CURRENT_STATE.PC+SIGNEXT((Imm<<1,13))-4;
+    NEXT_STATE.PC = CURRENT_STATE.PC+SIGNEXT(Imm<<1,13)-4;
   }
   return 0;
 }
 int BLTU(int Rs1, int Rs2, int Imm){
   if((unsigned)CURRENT_STATE.REGS[Rs1] < (unsigned)CURRENT_STATE.REGS[Rs2]){
-    NEXT_STATE.PC = CURRENT_STATE.PC+SIGNEXT((Imm<<1,13))-4;
+    NEXT_STATE.PC = CURRENT_STATE.PC+SIGNEXT(Imm<<1,13)-4;
   }
   return 0;
 }
 int BGEU(int Rs1, int Rs2, int Imm){
   if((unsigned)CURRENT_STATE.REGS[Rs1] >= (unsigned)CURRENT_STATE.REGS[Rs2]){
-    NEXT_STATE.PC = CURRENT_STATE.PC+SIGNEXT((Imm<<1,13))-4;
+    NEXT_STATE.PC = CURRENT_STATE.PC+SIGNEXT(Imm<<1,13)-4;
   }
   return 0;
 }
