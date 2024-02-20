@@ -344,38 +344,38 @@ int b_process(char* i_) {
   /* Add branch instructions here */
   if(!strcmp(d_opcode,"1100011")){
     if(Funct3 == 0){
-        printf("--- This is an BEQ instruction. \n");
-        BEQ(Rs1, Rs2, Label);
+        printf("--- This is an   instruction. \n");
+        BEQ(Rs1, Rs2, Imm);
         return 0;
     }
 
     if(Funct3 == 1){
         printf("--- This is an BNE instruction. \n");
-        BNE(Rs1, Rs2, Label);
+        BNE(Rs1, Rs2, Imm);
         return 0;
     }
 
     if(Funct3 == 4){
         printf("--- This is an BLT instruction. \n");
-        BLT(Rs1, Rs2, Label);
+        BLT(Rs1, Rs2, Imm);
         return 0;
     }
 
     if(Funct3 == 5){
         printf("--- This is an BGE instruction. \n");
-        BGE(Rs1, Rs2, Label);
+        BGE(Rs1, Rs2, Imm);
         return 0;
     }
 
     if(Funct3 == 6){
         printf("--- This is an BLTU instruction. \n");
-        BLTU(Rs1, Rs2, Label);
+        BLTU(Rs1, Rs2, Imm);
         return 0;
     }
 
     if(Funct3 == 7){
         printf("--- This is an BGEU instruction. \n");
-        BGEU(Rs1, Rs2, Label);
+        BGEU(Rs1, Rs2, Imm);
         return 0;
     }
   }	    
@@ -457,13 +457,51 @@ int s_process(char* i_) {
 
 int j_process(char* i_) {
 
+  char d_opcode[8];
+  d_opcode[0] = i_[31-6]; 
+  d_opcode[1] = i_[31-5]; 
+  d_opcode[2] = i_[31-4]; 
+  d_opcode[3] = i_[31-3];
+  d_opcode[4] = i_[31-2]; 
+  d_opcode[5] = i_[31-1]; 
+  d_opcode[6] = i_[31-0]; 
+  d_opcode[7] = '\0';
+  char rd[6]; 
+  rd[5] = '\0';
+  char imm[20];
+
+  for(int i = 0; i < 5; i++) {
+    rd[i] = i_[31-11+i];
+  } 
+  
+  // Old-fashioned method but works :)
+  imm[0] = i_[31-31]; 
+  imm[1] = i_[31-7]; 
+  imm[2] = i_[31-30]; 
+  imm[3] = i_[31-29];
+  imm[4] = i_[31-28]; 
+  imm[5] = i_[31-27]; 
+  imm[6] = i_[31-26];
+  imm[7] = i_[31-25];
+  imm[8] = i_[31-11];
+  imm[9] = i_[31-10];
+  imm[10] = i_[31-9];
+  imm[11] = i_[31-8];
+  imm[12] = '\0';  
+
+  int Imm = bchar_to_int(imm);
+  // printf ("Opcode = %s\n Rs1 = %d\n Rs2 = %d\n Imm = %d\n Funct3 = %d\n\n",
+	  // d_opcode, Rs1, Rs2, Imm, Funct3); ******
+  printf("\n");    
+
+
   /* This function execute Jump instructions */
   // FTSOL
   /* Add jump instructions here */ 
   if(!strcmp(d_opcode,"1101111")){
       if(Funct3 == 0){
           printf("--- This is an JAL instruction. \n");
-          JAL(Rd, Label);
+          JAL(Rd, Imm);
           return 0;
       }
 
