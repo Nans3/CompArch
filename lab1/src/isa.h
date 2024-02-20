@@ -25,7 +25,7 @@
 //
 #define SIGNEXT(v, sb) ((v & (1 << (sb - 1)) )?((~0)<<sb)|v:v)
 
-int ADD (int Rd, int Rs1, int Rs2, int Funct3) {
+int ADD (int Rd, int Rs1, int Rs2) {
 
   int cur = 0;
   cur = CURRENT_STATE.REGS[Rs1] + CURRENT_STATE.REGS[Rs2];
@@ -34,7 +34,7 @@ int ADD (int Rd, int Rs1, int Rs2, int Funct3) {
 
 }
 
-int SUB (int Rd, int Rs1, int Rs2, int Funct3) {
+int SUB (int Rd, int Rs1, int Rs2) {
 
   int cur = 0;
   cur = CURRENT_STATE.REGS[Rs1] - CURRENT_STATE.REGS[Rs2];
@@ -43,14 +43,14 @@ int SUB (int Rd, int Rs1, int Rs2, int Funct3) {
 
 }
 
-int SLL (int Rd, int Rs1, int Rs2, int Funct3) {
+int SLL (int Rd, int Rs1, int Rs2) {
 // ?
   NEXT_STATE.REGS[Rd] = CURRENT_STATE.REGS[Rs1] & 0x1f;
   return 0;
 
 }
 
-int SLT (int Rd, int Rs1, int Rs2, int Funct3) {
+int SLT (int Rd, int Rs1, int Rs2) {
 // ?
   int cur = 0;
   cur = CURRENT_STATE.REGS[Rs1] < CURRENT_STATE.REGS[Rs2];
@@ -59,7 +59,7 @@ int SLT (int Rd, int Rs1, int Rs2, int Funct3) {
 
 }
 
-int SLTU (int Rd, int Rs1, int Rs2, int Funct3) {
+int SLTU (int Rd, int Rs1, int Rs2) {
 // ?
   int cur = 0;
   cur = CURRENT_STATE.REGS[Rs1] < CURRENT_STATE.REGS[Rs2];
@@ -68,7 +68,7 @@ int SLTU (int Rd, int Rs1, int Rs2, int Funct3) {
 
 }
 
-int XOR (int Rd, int Rs1, int Rs2, int Funct3) {
+int XOR (int Rd, int Rs1, int Rs2) {
 // ?
   int cur = 0;
   cur = CURRENT_STATE.REGS[Rs1] < CURRENT_STATE.REGS[Rs2];
@@ -77,7 +77,7 @@ int XOR (int Rd, int Rs1, int Rs2, int Funct3) {
 
 }
 
-int SRL (int Rd, int Rs1, int Rs2, int Funct3) {
+int SRL (int Rd, int Rs1, int Rs2) {
 // ?
   int cur = 0;
   cur = CURRENT_STATE.REGS[Rs1] < CURRENT_STATE.REGS[Rs2];
@@ -86,7 +86,7 @@ int SRL (int Rd, int Rs1, int Rs2, int Funct3) {
 
 }
 
-int SRA (int Rd, int Rs1, int Rs2, int Funct3) {
+int SRA (int Rd, int Rs1, int Rs2) {
 // ?
   int cur = 0;
   cur = CURRENT_STATE.REGS[Rs1] < CURRENT_STATE.REGS[Rs2];
@@ -95,7 +95,7 @@ int SRA (int Rd, int Rs1, int Rs2, int Funct3) {
 
 }
 
-int OR (int Rd, int Rs1, int Rs2, int Funct3) {
+int OR (int Rd, int Rs1, int Rs2) {
 // ?
   int cur = 0;
   cur = CURRENT_STATE.REGS[Rs1] < CURRENT_STATE.REGS[Rs2];
@@ -104,7 +104,7 @@ int OR (int Rd, int Rs1, int Rs2, int Funct3) {
 
 }
 
-int AND (int Rd, int Rs1, int Rs2, int Funct3) {
+int AND (int Rd, int Rs1, int Rs2) {
 // ?
   int cur = 0;
   cur = CURRENT_STATE.REGS[Rs1] < CURRENT_STATE.REGS[Rs2];
@@ -113,7 +113,7 @@ int AND (int Rd, int Rs1, int Rs2, int Funct3) {
 
 }
 
-int ADDI(int Rd, int Rs1, int Imm, int Funct3) {
+int ADDI(int Rd, int Rs1, int Imm) {
 
   int cur = 0;
   cur = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm,12);
@@ -124,7 +124,7 @@ int ADDI(int Rd, int Rs1, int Imm, int Funct3) {
 
 // ***********
 
-int SLLI(int Rd, int Rs1, int Imm, int Funct3) {
+int SLLI(int Rd, int Rs1, int Imm) {
 
   int cur = 0;
   cur = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm,12);
@@ -133,7 +133,7 @@ int SLLI(int Rd, int Rs1, int Imm, int Funct3) {
 
 }
 
-int SLTI(int Rd, int Rs1, int Imm, int Funct3) {
+int SLTI(int Rd, int Rs1, int Imm) {
 
   int cur = 0;
   cur = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm,12);
@@ -142,7 +142,7 @@ int SLTI(int Rd, int Rs1, int Imm, int Funct3) {
 
 }
 
-int SLTIU(int Rd, int Rs1, int Imm, int Funct3) {
+int SLTIU(int Rd, int Rs1, int Imm) {
 
   int cur = 0;
   cur = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm,12);
@@ -151,7 +151,7 @@ int SLTIU(int Rd, int Rs1, int Imm, int Funct3) {
 
 }
 
-int XORI(int Rd, int Rs1, int Imm, int Funct3) {
+int XORI(int Rd, int Rs1, int Imm) {
 
   int cur = 0;
   cur = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm,12);
@@ -160,7 +160,7 @@ int XORI(int Rd, int Rs1, int Imm, int Funct3) {
 
 }
 
-int SRLI(int Rd, int Rs1, int Imm, int Funct3) {
+int SRLI(int Rd, int Rs1, int Imm) {
 
   int cur = 0;
   cur = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm,12);
@@ -169,7 +169,7 @@ int SRLI(int Rd, int Rs1, int Imm, int Funct3) {
 
 }
 
-int SRAI(int Rd, int Rs1, int Imm, int Funct3) {
+int SRAI(int Rd, int Rs1, int Imm) {
 
   int cur = 0;
   cur = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm,12);
@@ -178,7 +178,7 @@ int SRAI(int Rd, int Rs1, int Imm, int Funct3) {
 
 }
 
-int ORI(int Rd, int Rs1, int Imm, int Funct3) {
+int ORI(int Rd, int Rs1, int Imm) {
 
   int cur = 0;
   cur = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm,12);
@@ -187,7 +187,7 @@ int ORI(int Rd, int Rs1, int Imm, int Funct3) {
 
 }
 
-int ANDI(int Rd, int Rs1, int Imm, int Funct3) {
+int ANDI(int Rd, int Rs1, int Imm) {
 
   int cur = 0;
   cur = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm,12);
