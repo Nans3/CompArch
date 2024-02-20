@@ -246,13 +246,13 @@ int BGEU(int Rs1, int Rs2, int Imm){
 }
 
 int JAL(int Rd, int Imm){
-    NEXT_STATE.PC = CURRENT_STATE.PC + SIGNEXT((Imm<<1,21))-4;
+    NEXT_STATE.PC = CURRENT_STATE.PC + SIGNEXT(Imm<<1,21)-4;
     NEXT_STATE.REGS[Rd] = CURRENT_STATE.PC + 4;
   return 0;
 }
 
 int JALR(int Rd, int Rs1, int Imm){
-    NEXT_STATE.PC = CURRENT_STATE.REGS[Rs1] + SIGNEXT((Imm,12))-4;
+    NEXT_STATE.PC = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm,12)-4;
     if(!Rd){
       NEXT_STATE.REGS[Rd] = CURRENT_STATE.PC + 4;
     }
