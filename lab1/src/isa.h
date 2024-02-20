@@ -23,7 +23,7 @@
 //   if no, just give number
 //   if yes, sign extend (e.g., 0x80_0000 -> 0xFF80_0000)
 //
-#define SIGNEXT(v, sb) ((v) | (((v) & (1 << (sb))) ? ~((1 << (sb))-1) : 0))
+#define SIGNEXT(v, sb) ((v & (1 << (sb - 1)) )?((~0)<<sb)|v:v)
 
 int ADD (int Rd, int Rs1, int Rs2, int Funct3) {
 
