@@ -26,7 +26,6 @@
 #define SIGNEXT(v, sb) ((v & (1 << (sb - 1)) )?((~0)<<sb)|v:v)
 
 int ADD (int Rd, int Rs1, int Rs2) {
-
   int cur = 0;
   cur = CURRENT_STATE.REGS[Rs1] + CURRENT_STATE.REGS[Rs2];
   if(Rd){
@@ -37,7 +36,6 @@ int ADD (int Rd, int Rs1, int Rs2) {
 }
 
 int SUB (int Rd, int Rs1, int Rs2) {
-
   int cur = 0;
   cur = CURRENT_STATE.REGS[Rs1] - CURRENT_STATE.REGS[Rs2];
   if(Rd){
@@ -48,7 +46,6 @@ int SUB (int Rd, int Rs1, int Rs2) {
 }
 
 int SLL (int Rd, int Rs1, int Rs2) {
- 
   if(Rd){
     NEXT_STATE.REGS[Rd] = CURRENT_STATE.REGS[Rs1] & 0x1f << CURRENT_STATE.REGS[Rs2] ;
   }
@@ -57,7 +54,6 @@ int SLL (int Rd, int Rs1, int Rs2) {
 }
 
 int SLT (int Rd, int Rs1, int Rs2) {
-// signed ?
   if(Rd){
     if((signed)CURRENT_STATE.REGS[Rs1] < (signed)CURRENT_STATE.REGS[Rs2]){
       NEXT_STATE.REGS[Rd] = 1;
@@ -68,7 +64,6 @@ int SLT (int Rd, int Rs1, int Rs2) {
 }
 
 int SLTU (int Rd, int Rs1, int Rs2) {
- 
   if(Rd){
     if((unsigned)CURRENT_STATE.REGS[Rs1] < (unsigned)CURRENT_STATE.REGS[Rs2]){
       NEXT_STATE.REGS[Rd] = 1;
@@ -79,16 +74,12 @@ int SLTU (int Rd, int Rs1, int Rs2) {
 }
 
 int XOR (int Rd, int Rs1, int Rs2) {
- 
   if(Rd){
     NEXT_STATE.REGS[Rd] = (CURRENT_STATE.REGS[Rs1] ^ CURRENT_STATE.REGS[Rs2]);
   }
   return 0;
 
 }
-// CURRENT_STATE.REGS[Rs1] represents the value stored in register Rs1
-//CURRENT_STATE.REGS[Rs2] represents the number of positions to shift
-//CURRENT_STATE.REGS[Rs1] >> CURRENT_STATE.REGS[Rs2] performs the logical right shift operation.
 int SRL (int Rd, int Rs1, int Rs2) {
   if(Rd){
     NEXT_STATE.REGS[Rd] = CURRENT_STATE.REGS[Rs1] >> CURRENT_STATE.REGS[Rs2] ;
@@ -96,15 +87,6 @@ int SRL (int Rd, int Rs1, int Rs2) {
   return 0;
 }
 
-/* Here is the statement for SRL I found online ^^^^^^
-
-int SRL(int Rd, int Rs1, int Rs2) {
-    if (Rd) {
-        NEXT_STATE.REGS[Rd] = CURRENT_STATE.REGS[Rs1] >> CURRENT_STATE.REGS[Rs2];
-    }
-    return 0;
-}
-*/
 
 int SRA (int Rd, int Rs1, int Rs2) {
     if(Rd){
@@ -113,30 +95,17 @@ int SRA (int Rd, int Rs1, int Rs2) {
   }
   return 0;
 }
-/*
-int SRA(int Rd, int Rs1, int Rs2) { ^^^^^
-    if (Rd) {
-        NEXT_STATE.REGS[Rd] = CURRENT_STATE.REGS[Rs1] >> CURRENT_STATE.REGS[Rs2];
-        // Perform arithmetic right shift
-        NEXT_STATE.REGS[Rd] = (int)((unsigned int)CURRENT_STATE.REGS[Rs1] >> CURRENT_STATE.REGS[Rs2]);
-    }
-    return 0;
-}
-
-*/
 
 int OR (int Rd, int Rs1, int Rs2) {
- 
-if(Rd){
-    NEXT_STATE.REGS[Rd] = CURRENT_STATE.REGS[Rs1] | CURRENT_STATE.REGS[Rs2];
-}
-return 0;
-  
+  if(Rd){
+      NEXT_STATE.REGS[Rd] = CURRENT_STATE.REGS[Rs1] | CURRENT_STATE.REGS[Rs2];
+  }
+  return 0;
+    
 
-}
+  }
 
 int AND (int Rd, int Rs1, int Rs2) {
-   
   if(Rd){
     NEXT_STATE.REGS[Rd] = CURRENT_STATE.REGS[Rs1] & CURRENT_STATE.REGS[Rs2];
   }
@@ -150,7 +119,7 @@ int ADDI(int Rd, int Rs1, int Imm) {
   return 0;
 }
 
-// ***********
+
 
 int SLLI(int Rd, int Rs1, int Imm) {
   if(Rd){
@@ -177,7 +146,6 @@ int SLTIU(int Rd, int Rs1, int Imm) {
 }
 
 int XORI(int Rd, int Rs1, int Imm) {
- 
   if(Rd){
     NEXT_STATE.REGS[Rd] = (CURRENT_STATE.REGS[Rs1] ^ SIGNEXT(Imm,12));
   }
@@ -217,17 +185,7 @@ int ANDI(int Rd, int Rs1, int Imm) {
   return 0;
 
 }
-// ***********
 
-// int BNE (int Rs1, int Rs2, int Imm, int Funct3) {
-
-//   int cur = 0;
-//   Imm = Imm << 1;
-//   if (CURRENT_STATE.REGS[Rs1] != CURRENT_STATE.REGS[Rs2])
-//     NEXT_STATE.PC = (CURRENT_STATE.PC - 4) + (SIGNEXT(Imm,13));
-//   return 0;
-
-// }
 
 int  BEQ(int Rs1, int Rs2, int Imm){
   if(CURRENT_STATE.REGS[Rs1] == CURRENT_STATE.REGS[Rs2]){
@@ -235,30 +193,35 @@ int  BEQ(int Rs1, int Rs2, int Imm){
   }
   return 0;
 }
+
 int  BNE(int Rs1, int Rs2, int Imm){
   if(CURRENT_STATE.REGS[Rs1] != CURRENT_STATE.REGS[Rs2]){
     NEXT_STATE.PC = CURRENT_STATE.PC+SIGNEXT(Imm<<1,13)-4;
   }
   return 0;
 }
+
 int  BLT(int Rs1, int Rs2, int Imm){
   if((signed)CURRENT_STATE.REGS[Rs1] < (signed)CURRENT_STATE.REGS[Rs2]){
     NEXT_STATE.PC = CURRENT_STATE.PC+SIGNEXT(Imm<<1,13)-4;
   }
   return 0;
 }
+
 int  BGE(int Rs1, int Rs2, int Imm){
   if((signed)CURRENT_STATE.REGS[Rs1] >= (signed)CURRENT_STATE.REGS[Rs2]){
     NEXT_STATE.PC = CURRENT_STATE.PC+SIGNEXT(Imm<<1,13)-4;
   }
   return 0;
 }
+
 int BLTU(int Rs1, int Rs2, int Imm){
   if((unsigned)CURRENT_STATE.REGS[Rs1] < (unsigned)CURRENT_STATE.REGS[Rs2]){
     NEXT_STATE.PC = CURRENT_STATE.PC+SIGNEXT(Imm<<1,13)-4;
   }
   return 0;
 }
+
 int BGEU(int Rs1, int Rs2, int Imm){
   if((unsigned)CURRENT_STATE.REGS[Rs1] >= (unsigned)CURRENT_STATE.REGS[Rs2]){
     NEXT_STATE.PC = CURRENT_STATE.PC+SIGNEXT(Imm<<1,13)-4;
@@ -275,7 +238,6 @@ int JAL(int Rd, int Imm){
 
 int JALR(int Rd, int Rs1, int Imm){
     NEXT_STATE.PC = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm,12)-4;
-    // Maybe !Rd sure
     if(Rd){
       NEXT_STATE.REGS[Rd] = CURRENT_STATE.PC + 4;
     }
@@ -283,71 +245,94 @@ int JALR(int Rd, int Rs1, int Imm){
 }
 
 int AUIPC(int Rd, int UpImm){
+  if(Rd){
+    NEXT_STATE.REGS[Rd] = (UpImm << 12) + CURRENT_STATE.PC;
+  }
+  return 0;
+}
+
+int LB(int Rs2, int Rs1, int Imm){
+  if(Rd){
+    int effectiveAddress = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
+    int mask = ~0x3;
+    int off = mem_read_32(effectiveAddress) & ~mask;
+    int RD = ((CURRENT_STATE.REGS[Rd] >> (off * 8)) & 0xFF);
+    NEXT_STATE.REGS[Rd] = SIGNEXT(RD, 8);
+  }
+  return 0;
+}
+
+int LBU(int Rs2, int Rs1, int Imm){
+  if(Rd){
+    int effectiveAddress = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
+    int mask = ~0x3;
+    int off = mem_read_32(effectiveAddress) & ~mask;
+    int RD = ((CURRENT_STATE.REGS[Rd] >> (off * 8)) & 0xFF);
+    NEXT_STATE.REGS[Rd] = RD;
+  }
+  return 0;
+}
+
+int LH(int Rs2, int Rs1, int Imm){
+  if(Rd){
+    int effectiveAddress = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
+    int mask = ~0x3;
+    int off = mem_read_32(effectiveAddress) & ~mask;
+    int RD = ((CURRENT_STATE.REGS[Rd] >> (off * 16)) & 0xFFFF);
+    NEXT_STATE.REGS[Rd] = SIGNEXT(RD, 16);
+  }
+  return 0;
+}
+
+int LHU(int Rs2, int Rs1, int Imm){
+  if(Rd){
+    int effectiveAddress = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
+    int mask = ~0x3;
+    int off = mem_read_32(effectiveAddress) & ~mask;
+    int RD = ((CURRENT_STATE.REGS[Rd] >> (off * 16)) & 0xFFFF);
+    NEXT_STATE.REGS[Rd] = RD;// check this
+  }
+  return 0;
+}
+
+int LW(int Rd, int Rs1, int Imm){
+  if(Rd){
+    int effectiveAddress = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
+    NEXT_STATE.REGS[Rd] = mem_read_32(effectiveAddress);
+  }
   return 0;
 }
 
 int LUI(int Rd, int UpImm){
+
   return 0;
 }
 
-int SB(int Rs2, int Rs1){
+int SB(int Rs2, int Rs1, int Imm){
+  int effectiveAddress = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
+  int mask = ~0x3;
+  int off = effectiveAddress & ~mask;
+  int RD = ((CURRENT_STATE.REGS[Rs2] >> (off * 8)) & 0xFF);
+  int RD = ((mem_read_32(effectiveAddress) >> (off * 8)) & 0xFF);
+  mem_write_32(effectiveAddress, RD ^ );
+
   return 0;
 }
-int SH(int Rs2, int Rs1){
+
+int SH(int Rs2, int Rs1, int Imm){
+  int effectiveAddress = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
+  
+  mem_write_32(effectiveAddress, CURRENT_STATE.REGS[Rs2]);
   return 0;
 }
-int SW(int Rs2, int Rs1){
+
+
+int SW(int Rs2, int Rs1, int Imm){
+  int effectiveAddress = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
+  mem_write_32(effectiveAddress, CURRENT_STATE.REGS[Rs2]);
   return 0;
 }
 
-// I Instructions
-// int LB (char* i_);
-// int LH (char* i_);
-// int LW (char* i_);
-// int LBU (char* i_);
-// int LHU (char* i_);
-// int SLLI (char* i_);
-// int SLTI (char* i_);
-// int SLTIU (char* i_);
-// int XORI (char* i_);
-// int SRLI (char* i_);
-// int SRAI (char* i_);
-// int ORI (char* i_);
-// int ANDI (char* i_);
 
-// U Instruction
-// int AUIPC (char* i_);
-// int LUI (char* i_);
-
-// S Instruction
-// int SB (char* i_);
-// int SH (char* i_);
-// int SW (char* i_);
-
-// R instruction
-// int SUB (char* i_);
-// int SLL (char* i_);
-// int SLT (char* i_);
-// int SLTU (char* i_);
-// int XOR (char* i_);
-// int SRL (char* i_);
-// int SRA (char* i_);
-// int OR (char* i_);
-// int AND (char* i_);
-
-// B instructions
-// int BEQ (char* i_);
-// int BLT (char* i_);
-// int BGE (char* i_);
-// int BLTU (char* i_);
-// int BGEU (char* i_);
-
-// I instruction
-// int JALR (char* i_);
-
-// J instruction
-// int JAL (char* i_);
-
-// int ECALL (char* i_){return 0;}
 
 #endif
