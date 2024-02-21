@@ -48,9 +48,9 @@ int SUB (int Rd, int Rs1, int Rs2) {
 }
 
 int SLL (int Rd, int Rs1, int Rs2) {
-// ?
+ 
   if(Rd){
-    NEXT_STATE.REGS[Rd] = CURRENT_STATE.REGS[Rs1] & 0x1f << CURRENT_STATE.REGS[Rs1] ;
+    NEXT_STATE.REGS[Rd] = CURRENT_STATE.REGS[Rs1] & 0x1f << CURRENT_STATE.REGS[Rs2] ;
   }
   return 0;
 
@@ -68,7 +68,7 @@ int SLT (int Rd, int Rs1, int Rs2) {
 }
 
 int SLTU (int Rd, int Rs1, int Rs2) {
-// ?
+ 
   if(Rd){
     if((unsigned)CURRENT_STATE.REGS[Rs1] < (unsigned)CURRENT_STATE.REGS[Rs2]){
       NEXT_STATE.REGS[Rd] = 1;
@@ -79,14 +79,16 @@ int SLTU (int Rd, int Rs1, int Rs2) {
 }
 
 int XOR (int Rd, int Rs1, int Rs2) {
-// ?
+ 
   if(Rd){
     NEXT_STATE.REGS[Rd] = (CURRENT_STATE.REGS[Rs1] ^ CURRENT_STATE.REGS[Rs2]);
   }
   return 0;
 
 }
-
+// CURRENT_STATE.REGS[Rs1] represents the value stored in register Rs1
+//CURRENT_STATE.REGS[Rs2] represents the number of positions to shift
+//CURRENT_STATE.REGS[Rs1] >> CURRENT_STATE.REGS[Rs2] performs the logical right shift operation.
 int SRL (int Rd, int Rs1, int Rs2) {
   if(Rd){
     NEXT_STATE.REGS[Rd] = CURRENT_STATE.REGS[Rs1] >> CURRENT_STATE.REGS[Rs2] ;
@@ -94,17 +96,23 @@ int SRL (int Rd, int Rs1, int Rs2) {
   return 0;
 }
 
+/* Here is the statement for SRL I found online ^^^^^^
+
+int SRL(int Rd, int Rs1, int Rs2) {
+    if (Rd) {
+        NEXT_STATE.REGS[Rd] = CURRENT_STATE.REGS[Rs1] >> CURRENT_STATE.REGS[Rs2];
+    }
+    return 0;
+}
+*/
 
 int SRA (int Rd, int Rs1, int Rs2) {
-// ?
     if(Rd){
     NEXT_STATE.REGS[Rd] = CURRENT_STATE.REGS[Rs1] >> CURRENT_STATE.REGS[Rs2] ;
-
     NEXT_STATE.REGS[Rd] = (int)((unsigned int)CURRENT_STATE.REGS[Rs1] >> CURRENT_STATE.REGS[Rs2]);
-  }//Add Mask?
+  }
   return 0;
 }
-
 /*
 int SRA(int Rd, int Rs1, int Rs2) { ^^^^^
     if (Rd) {
@@ -118,48 +126,44 @@ int SRA(int Rd, int Rs1, int Rs2) { ^^^^^
 */
 
 int OR (int Rd, int Rs1, int Rs2) {
-// ?
-  int cur = 0;
-  cur = CURRENT_STATE.REGS[Rs1] < CURRENT_STATE.REGS[Rs2];
-  NEXT_STATE.REGS[Rd] = cur;
-  return 0;
+ 
+if(Rd){
+    NEXT_STATE.REGS[Rd] = CURRENT_STATE.REGS[Rs1] | CURRENT_STATE.REGS[Rs2];
+}
+return 0;
+  
 
 }
 
 int AND (int Rd, int Rs1, int Rs2) {
-// ?
-  int cur = 0;
-  cur = CURRENT_STATE.REGS[Rs1] < CURRENT_STATE.REGS[Rs2];
-  NEXT_STATE.REGS[Rd] = cur;
+   
+  if(Rd){
+    NEXT_STATE.REGS[Rd] = CURRENT_STATE.REGS[Rs1] & CURRENT_STATE.REGS[Rs2];
+  }
   return 0;
-
 }
 
 int ADDI(int Rd, int Rs1, int Imm) {
-
-  int cur = 0;
-  cur = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm,12);
-  NEXT_STATE.REGS[Rd] = cur;
+  if(Rd){
+    NEXT_STATE.REGS[Rd] = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm,12);;
+  }
   return 0;
-
 }
 
 // ***********
 
 int SLLI(int Rd, int Rs1, int Imm) {
-
-  int cur = 0;
-  cur = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm,12);
-  NEXT_STATE.REGS[Rd] = cur;
+  if(Rd){
+    NEXT_STATE.REGS[Rd] = (CURRENT_STATE.REGS[Rs1] & 0xFC0) << SIGNEXT(Imm,12);;
+  } 
   return 0;
 
 }
 
 int SLTI(int Rd, int Rs1, int Imm) {
-
-  int cur = 0;
-  cur = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm,12);
-  NEXT_STATE.REGS[Rd] = cur;
+  if(Rd){
+    NEXT_STATE.REGS[Rd] = (CURRENT_STATE.REGS[Rs1] < SIGNEXT(Imm,12));
+  }
   return 0;
 
 }
