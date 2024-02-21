@@ -154,7 +154,7 @@ int ADDI(int Rd, int Rs1, int Imm) {
 
 int SLLI(int Rd, int Rs1, int Imm) {
   if(Rd){
-    NEXT_STATE.REGS[Rd] = (CURRENT_STATE.REGS[Rs1] & 0xFC0) << SIGNEXT(Imm,12);;
+    NEXT_STATE.REGS[Rd] = (CURRENT_STATE.REGS[Rs1]) << (Imm & 0x1F);
   } 
   return 0;
 
@@ -162,66 +162,61 @@ int SLLI(int Rd, int Rs1, int Imm) {
 
 int SLTI(int Rd, int Rs1, int Imm) {
   if(Rd){
-    NEXT_STATE.REGS[Rd] = (CURRENT_STATE.REGS[Rs1] < SIGNEXT(Imm,12));
+    NEXT_STATE.REGS[Rd] = ((signed)CURRENT_STATE.REGS[Rs1] < (signed)SIGNEXT(Imm,12));
   }
   return 0;
 
 }
 
 int SLTIU(int Rd, int Rs1, int Imm) {
-
-  int cur = 0;
-  cur = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm,12);
-  NEXT_STATE.REGS[Rd] = cur;
+  if(Rd){
+    NEXT_STATE.REGS[Rd] = ((unsigned)CURRENT_STATE.REGS[Rs1] < (unsigned)SIGNEXT(Imm,12));
+  }
   return 0;
 
 }
 
 int XORI(int Rd, int Rs1, int Imm) {
-
-  int cur = 0;
-  cur = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm,12);
-  NEXT_STATE.REGS[Rd] = cur;
+ 
+  if(Rd){
+    NEXT_STATE.REGS[Rd] = (CURRENT_STATE.REGS[Rs1] ^ SIGNEXT(Imm,12));
+  }
   return 0;
 
 }
 
 int SRLI(int Rd, int Rs1, int Imm) {
-
-  int cur = 0;
-  cur = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm,12);
-  NEXT_STATE.REGS[Rd] = cur;
+  if(Rd){
+    NEXT_STATE.REGS[Rd] = (unsigned)(CURRENT_STATE.REGS[Rs1]) >> (unsigned)(Imm & 0x1F);
+  } 
   return 0;
 
 }
 
 int SRAI(int Rd, int Rs1, int Imm) {
-
-  int cur = 0;
-  cur = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm,12);
-  NEXT_STATE.REGS[Rd] = cur;
+  if(Rd){
+    NEXT_STATE.REGS[Rd] = (signed)(CURRENT_STATE.REGS[Rs1]) >> (signed)(Imm & 0x1F);
+  } 
   return 0;
 
 }
 
-int ORI(int Rd, int Rs1, int Imm) {
 
-  int cur = 0;
-  cur = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm,12);
-  NEXT_STATE.REGS[Rd] = cur;
+int ORI(int Rd, int Rs1, int Imm) {
+  if(Rd){
+    NEXT_STATE.REGS[Rd] = (CURRENT_STATE.REGS[Rs1]) | (Imm & 0x1F);
+  } 
   return 0;
 
 }
 
 int ANDI(int Rd, int Rs1, int Imm) {
-
-  int cur = 0;
-  cur = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm,12);
-  NEXT_STATE.REGS[Rd] = cur;
+  if(Rd){
+    NEXT_STATE.REGS[Rd] = (CURRENT_STATE.REGS[Rs1]) & (Imm & 0x1F);
+  } 
   return 0;
 
 }
-
 // ***********
 
 // int BNE (int Rs1, int Rs2, int Imm, int Funct3) {
