@@ -255,9 +255,11 @@ int LB(int Rs2, int Rs1, int Imm){
   if(Rd){
     int effectiveAddress = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
     int mask = ~0x3;
-    int off = mem_read_32(effectiveAddress) & ~mask;
-    int RD = ((CURRENT_STATE.REGS[Rd] >> (off * 8)) & 0xFF);
-    NEXT_STATE.REGS[Rd] = SIGNEXT(RD, 8);
+    int alignedAddress =  effectiveAddress & mask;
+    int offset = effectiveAddress & ~mask;
+    int readData = mem_read_32(alignedAddress);
+    readData = ((readData >> (offset * 8)) & 0xFF);
+    NEXT_STATE.REGS[Rd] = SIGNEXT(readData, 8);
   }
   return 0;
 }
@@ -266,9 +268,11 @@ int LBU(int Rs2, int Rs1, int Imm){
   if(Rd){
     int effectiveAddress = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
     int mask = ~0x3;
-    int off = mem_read_32(effectiveAddress) & ~mask;
-    int RD = ((CURRENT_STATE.REGS[Rd] >> (off * 8)) & 0xFF);
-    NEXT_STATE.REGS[Rd] = RD;
+    int alignedAddress =  effectiveAddress & mask;
+    int offset = effectiveAddress & ~mask;
+    int readData = mem_read_32(alignedAddress);
+    readData = ((readData >> (offset * 8)) & 0xFF);
+    NEXT_STATE.REGS[Rd] = readData;
   }
   return 0;
 }
@@ -277,9 +281,11 @@ int LH(int Rs2, int Rs1, int Imm){
   if(Rd){
     int effectiveAddress = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
     int mask = ~0x3;
-    int off = mem_read_32(effectiveAddress) & ~mask;
-    int RD = ((CURRENT_STATE.REGS[Rd] >> (off * 16)) & 0xFFFF);
-    NEXT_STATE.REGS[Rd] = SIGNEXT(RD, 16);
+    int alignedAddress =  effectiveAddress & mask;
+    int offset = effectiveAddress & ~mask;
+    int readData = mem_read_32(alignedAddress);
+    readData = ((readData >> (offset * 8)) & 0xFFFF);
+    NEXT_STATE.REGS[Rd] = SIGNEXT(readData, 16);
   }
   return 0;
 }
@@ -288,9 +294,11 @@ int LHU(int Rs2, int Rs1, int Imm){
   if(Rd){
     int effectiveAddress = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
     int mask = ~0x3;
-    int off = mem_read_32(effectiveAddress) & ~mask;
-    int RD = ((CURRENT_STATE.REGS[Rd] >> (off * 16)) & 0xFFFF);
-    NEXT_STATE.REGS[Rd] = RD;// check this
+    int alignedAddress =  effectiveAddress & mask;
+    int offset = effectiveAddress & ~mask;
+    int readData = mem_read_32(alignedAddress);
+    readData = ((readData >> (offset * 8)) & 0xFFFF);
+    NEXT_STATE.REGS[Rd] = readData;
   }
   return 0;
 }
