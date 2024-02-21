@@ -251,7 +251,7 @@ int AUIPC(int Rd, int UpImm){
   return 0;
 }
 
-int LB(int Rs2, int Rs1, int Imm){
+int LB(int Rd, int Rs1, int Imm){
   if(Rd){
     int effectiveAddress = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
     int mask = ~0x3;
@@ -264,7 +264,7 @@ int LB(int Rs2, int Rs1, int Imm){
   return 0;
 }
 
-int LBU(int Rs2, int Rs1, int Imm){
+int LBU(int Rd, int Rs1, int Imm){
   if(Rd){
     int effectiveAddress = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
     int mask = ~0x3;
@@ -277,7 +277,7 @@ int LBU(int Rs2, int Rs1, int Imm){
   return 0;
 }
 
-int LH(int Rs2, int Rs1, int Imm){
+int LH(int Rd, int Rs1, int Imm){
   if(Rd){
     int effectiveAddress = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
     int mask = ~0x3;
@@ -290,7 +290,7 @@ int LH(int Rs2, int Rs1, int Imm){
   return 0;
 }
 
-int LHU(int Rs2, int Rs1, int Imm){
+int LHU(int Rd, int Rs1, int Imm){
   if(Rd){
     int effectiveAddress = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
     int mask = ~0x3;
