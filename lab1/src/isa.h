@@ -29,7 +29,9 @@ int ADD (int Rd, int Rs1, int Rs2) {
 
   int cur = 0;
   cur = CURRENT_STATE.REGS[Rs1] + CURRENT_STATE.REGS[Rs2];
-  NEXT_STATE.REGS[Rd] = cur;
+  if(Rd){
+    NEXT_STATE.REGS[Rd] = cur;
+  }
   return 0;
 
 }
@@ -38,62 +40,92 @@ int SUB (int Rd, int Rs1, int Rs2) {
 
   int cur = 0;
   cur = CURRENT_STATE.REGS[Rs1] - CURRENT_STATE.REGS[Rs2];
-  NEXT_STATE.REGS[Rd] = cur;
+  if(Rd){
+    NEXT_STATE.REGS[Rd] = cur;  
+  }
   return 0;
 
 }
 
 int SLL (int Rd, int Rs1, int Rs2) {
 // ?
-  NEXT_STATE.REGS[Rd] = CURRENT_STATE.REGS[Rs1] & 0x1f;
+  if(Rd){
+    NEXT_STATE.REGS[Rd] = CURRENT_STATE.REGS[Rs1] & 0x1f << CURRENT_STATE.REGS[Rs1] ;
+  }
   return 0;
 
 }
 
 int SLT (int Rd, int Rs1, int Rs2) {
-// ?
-  int cur = 0;
-  cur = CURRENT_STATE.REGS[Rs1] < CURRENT_STATE.REGS[Rs2];
-  NEXT_STATE.REGS[Rd] = cur;
+// signed ?
+  if(Rd){
+    if((signed)CURRENT_STATE.REGS[Rs1] < (signed)CURRENT_STATE.REGS[Rs2]){
+      NEXT_STATE.REGS[Rd] = 1;
+    }
+  }
   return 0;
 
 }
 
 int SLTU (int Rd, int Rs1, int Rs2) {
 // ?
-  int cur = 0;
-  cur = CURRENT_STATE.REGS[Rs1] < CURRENT_STATE.REGS[Rs2];
-  NEXT_STATE.REGS[Rd] = cur;
+  if(Rd){
+    if((unsigned)CURRENT_STATE.REGS[Rs1] < (unsigned)CURRENT_STATE.REGS[Rs2]){
+      NEXT_STATE.REGS[Rd] = 1;
+    }
+  }
   return 0;
 
 }
 
 int XOR (int Rd, int Rs1, int Rs2) {
 // ?
-  int cur = 0;
-  cur = CURRENT_STATE.REGS[Rs1] < CURRENT_STATE.REGS[Rs2];
-  NEXT_STATE.REGS[Rd] = cur;
+  if(Rd){
+    NEXT_STATE.REGS[Rd] = (CURRENT_STATE.REGS[Rs1] ^ CURRENT_STATE.REGS[Rs2]);
+  }
   return 0;
 
 }
 
 int SRL (int Rd, int Rs1, int Rs2) {
 // ?
-  int cur = 0;
-  cur = CURRENT_STATE.REGS[Rs1] < CURRENT_STATE.REGS[Rs2];
-  NEXT_STATE.REGS[Rd] = cur;
+  if(Rd){
+    NEXT_STATE.REGS[Rd] = CURRENT_STATE.REGS[Rs1] >> CURRENT_STATE.REGS[Rs2] ;
+  }//Add Mask?
   return 0;
-
 }
+
+/* Here is the statement for SRL I found online ^^^^^^
+
+int SRL(int Rd, int Rs1, int Rs2) {
+    if (Rd) {
+        NEXT_STATE.REGS[Rd] = CURRENT_STATE.REGS[Rs1] >> CURRENT_STATE.REGS[Rs2];
+    }
+    return 0;
+}
+*/
 
 int SRA (int Rd, int Rs1, int Rs2) {
 // ?
-  int cur = 0;
-  cur = CURRENT_STATE.REGS[Rs1] < CURRENT_STATE.REGS[Rs2];
-  NEXT_STATE.REGS[Rd] = cur;
-  return 0;
+    if(Rd){
+    NEXT_STATE.REGS[Rd] = CURRENT_STATE.REGS[Rs1] >> CURRENT_STATE.REGS[Rs2] ;
 
+    NEXT_STATE.REGS[Rd] = (int)((unsigned int)CURRENT_STATE.REGS[Rs1] >> CURRENT_STATE.REGS[Rs2]);
+  }//Add Mask?
+  return 0;
 }
+
+/*
+int SRA(int Rd, int Rs1, int Rs2) { ^^^^^
+    if (Rd) {
+        NEXT_STATE.REGS[Rd] = CURRENT_STATE.REGS[Rs1] >> CURRENT_STATE.REGS[Rs2];
+        // Perform arithmetic right shift
+        NEXT_STATE.REGS[Rd] = (int)((unsigned int)CURRENT_STATE.REGS[Rs1] >> CURRENT_STATE.REGS[Rs2]);
+    }
+    return 0;
+}
+
+*/
 
 int OR (int Rd, int Rs1, int Rs2) {
 // ?
@@ -247,13 +279,15 @@ int BGEU(int Rs1, int Rs2, int Imm){
 
 int JAL(int Rd, int Imm){
     NEXT_STATE.PC = CURRENT_STATE.PC + SIGNEXT(Imm<<1,21)-4;
-    NEXT_STATE.REGS[Rd] = CURRENT_STATE.PC + 4;
-  return 0;
+    if(Rd){
+      N EXT_STATE.REGS[Rd] = CURRENT_STATE.PC + 4;
+    }  return 0;
 }
 
 int JALR(int Rd, int Rs1, int Imm){
     NEXT_STATE.PC = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm,12)-4;
-    if(!Rd){
+    // Maybe !Rd sure
+    if(Rd){
       NEXT_STATE.REGS[Rd] = CURRENT_STATE.PC + 4;
     }
   return 0;
