@@ -88,22 +88,12 @@ int XOR (int Rd, int Rs1, int Rs2) {
 }
 
 int SRL (int Rd, int Rs1, int Rs2) {
-// ?
   if(Rd){
     NEXT_STATE.REGS[Rd] = CURRENT_STATE.REGS[Rs1] >> CURRENT_STATE.REGS[Rs2] ;
-  }//Add Mask?
+  }
   return 0;
 }
 
-/* Here is the statement for SRL I found online ^^^^^^
-
-int SRL(int Rd, int Rs1, int Rs2) {
-    if (Rd) {
-        NEXT_STATE.REGS[Rd] = CURRENT_STATE.REGS[Rs1] >> CURRENT_STATE.REGS[Rs2];
-    }
-    return 0;
-}
-*/
 
 int SRA (int Rd, int Rs1, int Rs2) {
 // ?
