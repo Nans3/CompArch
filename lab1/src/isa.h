@@ -312,25 +312,35 @@ int LW(int Rd, int Rs1, int Imm){
 }
 
 int LUI(int Rd, int UpImm){
-
+  if(Rd){
+    NEXT_STATE.REGS[Rd] = (UpImm << 12);
+  }
   return 0;
 }
 
 int SB(int Rs2, int Rs1, int Imm){
   int effectiveAddress = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
   int mask = ~0x3;
-  int off = effectiveAddress & ~mask;
-  int RD = ((CURRENT_STATE.REGS[Rs2] >> (off * 8)) & 0xFF);
-  int RD = ((mem_read_32(effectiveAddress) >> (off * 8)) & 0xFF);
-  mem_write_32(effectiveAddress, RD ^ );
-
+  int alignedAddress =  effectiveAddress & mask;
+  int offset = effectiveAddress & ~mask;
+  int readData = mem_read_32(alignedAddress);
+  int readDataMask = ~(0xFF << (offset * 8));
+  readData = readData & readDataMask;
+  int writeData = ((CURRENT_STATE.REGS[Rs2] & 0xFF) << (offset * 8));
+  mem_write_32(effectiveAddress, writeData | readData);
   return 0;
 }
 
 int SH(int Rs2, int Rs1, int Imm){
-  int effectiveAddress = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
-  
-  mem_write_32(effectiveAddress, CURRENT_STATE.REGS[Rs2]);
+    int effectiveAddress = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
+  int mask = ~0x3;
+  int alignedAddress =  effectiveAddress & mask;
+  int offset = effectiveAddress & ~mask;
+  int readData = mem_read_32(alignedAddress);
+  int readDataMask = ~(0xFFFF << (offset * 8));
+  readData = readData & readDataMask;
+  int writeData = ((CURRENT_STATE.REGS[Rs2] & 0xFFFF) << (offset * 8));
+  mem_write_32(effectiveAddress, writeData | readData);
   return 0;
 }
 
@@ -339,6 +349,11 @@ int SW(int Rs2, int Rs1, int Imm){
   int effectiveAddress = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
   mem_write_32(effectiveAddress, CURRENT_STATE.REGS[Rs2]);
   return 0;
+}
+
+int ECALL(){
+  RUN_BIT = 0;
+  return 0;  
 }
 
 

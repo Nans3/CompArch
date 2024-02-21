@@ -383,7 +383,7 @@ int b_process(char* i_) {
   return 1;
 
 }
-
+//FILL IN
 int s_process(char* i_) {
  /* This function execute branch instruction          (I COPIED THIS FROM UP ABOVE, IT DOESN'T FOLLOW THE RULES)
 
@@ -533,7 +533,7 @@ int u_process(char* i_) {
   return 1;
 
 }
-
+// ******
 int interruption_process(char* i_) {
   // I think this is done but honestly no idea. Def ask about this 
   ECALL(i_);
@@ -548,7 +548,7 @@ int decode_and_execute(char* i_) {
      This function decode the instruction and update 
      CPU_State (NEXT_STATE)
   */
-
+// Add 3 types of opcodes for I types
   if((i_[25] == '0') && (i_[26] == '0') &&
      (i_[27] == '1') && (i_[28] == '0') &&
      (i_[29] == '0') && (i_[30] == '1') && (i_[31] == '1')) {
@@ -579,6 +579,8 @@ int decode_and_execute(char* i_) {
     printf("- This is a J Type Instruction. \n");
     j_process(i_);
   }
+
+  //  Add 2 types of opcodes for U types
   if((i_[25] == '0') && (i_[26] == '0') &&
      (i_[27] == '1') && (i_[28] == '0') &&
      (i_[29] == '1') && (i_[30] == '1') && (i_[31] == '1')) {
