@@ -274,7 +274,7 @@ int BGEU(int Rs1, int Rs2, int Imm){
 int JAL(int Rd, int Imm){
     NEXT_STATE.PC = CURRENT_STATE.PC + SIGNEXT(Imm<<1,21)-4;
     if(Rd){
-      N EXT_STATE.REGS[Rd] = CURRENT_STATE.PC + 4;
+      NEXT_STATE.REGS[Rd] = CURRENT_STATE.PC + 4;
     }  return 0;
 }
 
