@@ -86,8 +86,8 @@ int r_process(char* i_) {
   int Rs2 = bchar_to_int(rs2);		   
   int Rd = bchar_to_int(rd);
   int Funct3 = bchar_to_int(funct3);
-  printf ("Opcode = %s\n Rs1 = %d\n Rs2 = %d\n Rd = %d\n Funct3 = %d Funct7 = %d\n\n",
-	  d_opcode, Rs1, Rs2, Rd, Funct3, Funct7);
+  int Funct7 = bchar_to_int(funct7);
+  printf ("Opcode = %s\n Rs1 = %d\n Rs2 = %d\n Rd = %d\n Funct3 = %d Funct7 = %d\n\n",d_opcode, Rs1, Rs2, Rd, Funct3, Funct7);
   printf("\n");
 
   
@@ -197,31 +197,31 @@ int i_process(char* i_) {
 if(!strcmp(d_opcode,"0000011")){
   if(Funct3 == 0){
     printf("--- This is an LB instruction. \n");
-    LB(Rd, Rs1);
+    LB(Rd, Rs1, Imm);
     return 0;
   }
 
   if(Funct3 == 1){
       printf("--- This is an LH instruction. \n");
-      LH(Rd, Rs1);
+      LH(Rd, Rs1, Imm);
       return 0;
   }
 
   if(Funct3 == 2){
       printf("--- This is an LW instruction. \n");
-      LW(Rd, Rs1);
+      LW(Rd, Rs1, Imm);
       return 0;
   }
 
   if(Funct3 == 3){
       printf("--- This is an LBU instruction. \n");
-      LBU(Rd, Rs1);
+      LBU(Rd, Rs1, Imm);
       return 0;
   }
 
   if(Funct3 == 4){
       printf("--- This is an LHU instruction. \n");
-      LHU(Rd, Rs1);
+      LHU(Rd, Rs1, Imm);
       return 0;
   }
 }
