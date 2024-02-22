@@ -432,19 +432,19 @@ int s_process(char* i_) {
   if(!strcmp(d_opcode,"0100011")){
     if(Funct3 == 0){
         printf("--- This is an SB instruction. \n");
-        SB(Rs2, Rs1);
+        SB(Rs2, Rs1, Imm);
         return 0;
     }
 
     if(Funct3 == 1){
         printf("--- This is an SH instruction. \n");
-        SH(rs2, rs1);
+        SH(Rs2, Rs1, Imm);
         return 0;
     }
 
     if(Funct3 == 2){
         printf("--- This is an SW instruction. \n");
-        SW(rs2, rs1);
+        SW(Rs2, Rs1, Imm);
         return 0;
     }
   }	    
@@ -494,6 +494,10 @@ int j_process(char* i_) {
   imm[18] = i_[31-19];
   imm[19] = '\0';  
 
+  int Rd = bchar_to_int(rd);
+  int Funct3 = bchar_to_int(funct3);
+  int Imm = bchar_to_int(imm);
+
   int Imm = bchar_to_int(imm);
   printf ("Opcode = %s\n Rd = %d\n Imm = %d\n\n",
 	  d_opcode, Rd, Imm); 
@@ -530,6 +534,7 @@ int u_process(char* i_) {
   char rd[6]; 
   rd[5] = '\0';
   char imm[20];
+  char upimm[12];
 
   for(int i = 0; i < 5; i++) {
     rd[i] = i_[31-11+i];
@@ -555,9 +560,28 @@ int u_process(char* i_) {
   imm[16] = i_[31-14];
   imm[17] = i_[31-13];
   imm[18] = i_[31-12];
-  imm[19] = '\0';  
+  imm[19] = '\0';
 
+  upimm[0] = i_[31-31]; 
+  upimm[1] = i_[31-30]; 
+  upimm[2] = i_[31-29]; 
+  upimm[3] = i_[31-28];
+  upimm[4] = i_[31-27]; 
+  upimm[5] = i_[31-26]; 
+  upimm[6] = i_[31-25];
+  upimm[7] = i_[31-24];
+  upimm[8] = i_[31-23];
+  upimm[9] = i_[31-22];
+  upimm[10] = i_[31-20];
+  upimm[11] = '\0';
+
+
+  int Rs1 = bchar_to_int(rs1);
+  int Rd = bchar_to_int(rd);
+  int Funct3 = bchar_to_int(funct3);
   int Imm = bchar_to_int(imm);
+  int UpImm = bchar_to_int(upimm);
+
   printf ("Opcode = %s\n Rd = %d\n Imm = %d\n\n",
 	  d_opcode, Rd, Imm); 
   printf("\n");    
