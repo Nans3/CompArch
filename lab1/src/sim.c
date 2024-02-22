@@ -495,10 +495,8 @@ int j_process(char* i_) {
   imm[19] = '\0';  
 
   int Rd = bchar_to_int(rd);
-  int Funct3 = bchar_to_int(funct3);
   int Imm = bchar_to_int(imm);
 
-  int Imm = bchar_to_int(imm);
   printf ("Opcode = %s\n Rd = %d\n Imm = %d\n\n",
 	  d_opcode, Rd, Imm); 
   printf("\n");    
@@ -576,9 +574,7 @@ int u_process(char* i_) {
   upimm[11] = '\0';
 
 
-  int Rs1 = bchar_to_int(rs1);
   int Rd = bchar_to_int(rd);
-  int Funct3 = bchar_to_int(funct3);
   int Imm = bchar_to_int(imm);
   int UpImm = bchar_to_int(upimm);
 
