@@ -580,20 +580,16 @@ int u_process(char* i_) {
   printf("\n");    
   /* Add U instructions here */ 
   if(!strcmp(d_opcode,"0010111")){
-      if(Funct3 == 0){
-          printf("--- This is an AUIPC instruction. \n");
-          AUIPC(Rd, UpImm);
-          return 0;
-      }
-    }
+    printf("--- This is an AUIPC instruction. \n");
+    AUIPC(Rd, UpImm);
+    return 0;
+  }
   
   if(!strcmp(d_opcode,"0110111")){
-      if(Funct3 == 0){
-          printf("--- This is an LUI instruction. \n");
-          LUI(Rd, UpImm);
-          return 0;
-      }
-    }
+    printf("--- This is an LUI instruction. \n");
+    LUI(Rd, UpImm);
+    return 0;
+  }
   return 1;
 
 }
