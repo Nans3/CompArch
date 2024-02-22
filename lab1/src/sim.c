@@ -506,12 +506,9 @@ int j_process(char* i_) {
   // FTSOL
   /* Add jump instructions here */ 
   if(!strcmp(d_opcode,"1101111")){
-      if(Funct3 == 0){
-          printf("--- This is an JAL instruction. \n");
-          JAL(Rd, Imm);
-          return 0;
-      }
-
+    printf("--- This is an JAL instruction. \n");
+    JAL(Rd, Imm);
+    return 0;
     }
   return 1;
 
