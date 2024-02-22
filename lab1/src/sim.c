@@ -86,11 +86,11 @@ int r_process(char* i_) {
   int Rs2 = bchar_to_int(rs2);		   
   int Rd = bchar_to_int(rd);
   int Funct3 = bchar_to_int(funct3);
-  printf ("Opcode = %s\n Rs1 = %d\n Rs2 = %d\n Rd = %d\n Funct3 = %d\n\n",
-	  d_opcode, Rs1, Rs2, Rd, Funct3);
+  printf ("Opcode = %s\n Rs1 = %d\n Rs2 = %d\n Rd = %d\n Funct3 = %d Funct7 = %d\n\n",
+	  d_opcode, Rs1, Rs2, Rd, Funct3, Funct7);
   printf("\n");
 
-  /* Example - use and replicate */
+  
   if(!strcmp(d_opcode,"0110011")) {//Is R Type?
     if(!strcmp(funct3,"000")) {
       if(!strcmp(funct7,"0000000")) {//Is ADD?
@@ -148,7 +148,6 @@ int r_process(char* i_) {
     }
   }
 
-  /* Add other data instructions here */ 
 
   return 1;	
 }
@@ -550,8 +549,16 @@ int decode_and_execute(char* i_) {
   */
 // Add 3 types of opcodes for I types
   if((i_[25] == '0') && (i_[26] == '0') &&
+     (i_[27] == '0') && (i_[28] == '0') &&
+     (i_[29] == '0') && (i_[30] == '1') && (i_[31] == '1')
+    ||
+     (i_[25] == '0') && (i_[26] == '0') &&
      (i_[27] == '1') && (i_[28] == '0') &&
-     (i_[29] == '0') && (i_[30] == '1') && (i_[31] == '1')) {
+     (i_[29] == '0') && (i_[30] == '1') && (i_[31] == '1')
+    ||
+     (i_[25] == '1') && (i_[26] == '1') &&
+     (i_[27] == '0') && (i_[28] == '0') &&
+     (i_[29] == '1') && (i_[30] == '1') && (i_[31] == '1')) {
     printf("- This is an Immediate Type Instruction. \n");
     i_process(i_);
   }
@@ -580,8 +587,11 @@ int decode_and_execute(char* i_) {
     j_process(i_);
   }
 
-  //  Add 2 types of opcodes for U types
   if((i_[25] == '0') && (i_[26] == '0') &&
+     (i_[27] == '1') && (i_[28] == '0') &&
+     (i_[29] == '1') && (i_[30] == '1') && (i_[31] == '1')
+     ||
+     (i_[25] == '0') && (i_[26] == '1') &&
      (i_[27] == '1') && (i_[28] == '0') &&
      (i_[29] == '1') && (i_[30] == '1') && (i_[31] == '1')) {
     printf("- This is a U Type Instruction. \n");
