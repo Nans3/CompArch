@@ -201,25 +201,25 @@ if(!strcmp(d_opcode,"0000011")){
     return 0;
   }
 
-  if(Funct3 == 1){
+  else if(Funct3 == 1){
       printf("--- This is an LH instruction. \n");
       LH(Rd, Rs1, Imm);
       return 0;
   }
 
-  if(Funct3 == 2){
+  else if(Funct3 == 2){
       printf("--- This is an LW instruction. \n");
       LW(Rd, Rs1, Imm);
       return 0;
   }
 
-  if(Funct3 == 3){
+  else if(Funct3 == 3){
       printf("--- This is an LBU instruction. \n");
       LBU(Rd, Rs1, Imm);
       return 0;
   }
 
-  if(Funct3 == 4){
+  elseif(Funct3 == 4){
       printf("--- This is an LHU instruction. \n");
       LHU(Rd, Rs1, Imm);
       return 0;
@@ -240,41 +240,44 @@ if(!strcmp(d_opcode,"0000011")){
       ADDI(Rd, Rs1, Imm);
     return 0;
     }
-    if(Funct3 == 1) {
+    else if(Funct3 == 1) {
       printf("--- This is an SLLI instruction. \n");
       SLLI(Rd, Rs1, Imm);
     return 0;
     }
-    if(Funct3 == 2) {
+    else if(Funct3 == 2) {
       printf("--- This is an SLTI instruction. \n");
       SLTI(Rd, Rs1, Imm);
     return 0;
     }
-    if(Funct3 == 3) {
+    else if(Funct3 == 3) {
       printf("--- This is an SLTIU instruction. \n");
       SLTIU(Rd, Rs1, Imm);
     return 0;
     }
-    if(Funct3 == 4) {
+    else if(Funct3 == 4) {
       printf("--- This is an XORI instruction. \n");
       XORI(Rd, Rs1, Imm);
     return 0;
     }
-    if(Funct3 == 5) {
-      printf("--- This is an SRLI instruction. \n");
-      SRLI(Rd, Rs1, Imm);
-    return 0;
-
-    printf("--- This is an SRAI instruction. \n");
-      SRAI(Rd, Rs1, Imm);
-      return 0;
+    else if(Funct3 == 5) {
+      if(Funct7 == 0){
+        printf("--- This is an SRLI instruction. \n");
+        SRLI(Rd, Rs1, Imm);
+        return 0;
+      }
+      else if(Funct7 == 32){
+        printf("--- This is an SRAI instruction. \n");
+        SRAI(Rd, Rs1, Imm);
+        return 0;
+      }
     }
-    if(Funct3 == 6) {
+    else if(Funct3 == 6) {
       printf("--- This is an ORI instruction. \n");
       ORI(Rd, Rs1, Imm);
     return 0;
     }
-    if(Funct3 == 7) {
+    else if(Funct3 == 7) {
       printf("--- This is an ANDI instruction. \n");
       ANDI(Rd, Rs1, Imm);
     return 0;
