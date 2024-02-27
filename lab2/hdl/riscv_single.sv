@@ -138,6 +138,7 @@ module maindec (input  logic [6:0] op,
        7'b1100011: controls = 11'b0_10_0_0_00_1_01_0; // beq
        7'b0010011: controls = 11'b1_00_1_0_00_0_10_0; // I–type ALU
        7'b1101111: controls = 11'b1_11_0_0_10_0_00_1; // jal
+       
        default: controls = 11'bx_xx_x_x_xx_x_xx_x; // ???
      endcase // case (op)
    
@@ -157,13 +158,18 @@ module aludec (input  logic       opb5,
        2'b00: ALUControl = 3'b000; // addition
        2'b01: ALUControl = 3'b001; // subtraction
        default: case(funct3) // R–type or I–type ALU
+
 		  3'b000: if (RtypeSub)
 		    ALUControl = 3'b001; // sub
+
 		  else
 		    ALUControl = 3'b000; // add, addi
 		  3'b010: ALUControl = 3'b101; // slt, slti
 		  3'b110: ALUControl = 3'b011; // or, ori
 		  3'b111: ALUControl = 3'b010; // and, andi
+      
+		  3'b100: ALUControl = 3'b100; // xor, xori
+      
 		  default: ALUControl = 3'bxxx; // ???
 		endcase // case (funct3)       
      endcase // case (ALUOp)
@@ -325,6 +331,7 @@ module alu (input  logic [31:0] a, b,
        3'b010:  result = a & b;       // and
        3'b011:  result = a | b;       // or
        3'b101:  result = sum[31] ^ v; // slt       
+       3'b100:  result = a ^ b;       // xor
        default: result = 32'bx;
      endcase
 
