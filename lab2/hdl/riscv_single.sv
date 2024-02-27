@@ -157,6 +157,12 @@ module aludec (input  logic       opb5,
      case(ALUOp)
        2'b00: ALUControl = 3'b000; // addition
        2'b01: ALUControl = 3'b001; // subtraction
+/* 
+
+could use 10 or 11 maybe?? not sure if i understood when she said it. 
+
+*/
+
        default: case(funct3) // R–type or I–type ALU
 
 		  3'b000: if (RtypeSub)
