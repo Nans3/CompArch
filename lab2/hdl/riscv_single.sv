@@ -19,70 +19,43 @@
 //   sltu         0110011   011       0000000
 //   xor          0110011   100       0000000 
 //   srl          0110011   101       0000000
-//   sra          0110011   101       0000000
+//   sra          0110011   101       0100000
 //   or           0110011   110       0000000
 //   and          0110011   111       0000000
-
-
-//   addi         0010011   000       immediate
-//   andi         0010011   111       immediate
-//   ori          0010011   110       immediate
-//   slti         0010011   010       immediate
+// I Type -Standard
+//   addi         0010011   000       immediate[11:0]
+//   slli         0010011   001       immediate[11:0]
+//   slti         0010011   010       immediate[11:0]
+//   sltiu        0010011   011       immediate[11:0]
+//   xori         0010011   100       immediate[11:0]
+//   srli         0010011   101       immediate[11:0]
+//   srai         0010011   101       immediate[11:0]
+//   ori          0010011   110       immediate[11:0]
+//   andi         0010011   111       immediate[11:0]
+// I Type -Loads
+//   lb           0000011   000       immediate[11:0]
+//   lh           0000011   001       immediate[11:0]
+//   lw	          0000011   010       immediate[11:0]
+//   lbu          0000011   100       immediate[11:0]
+//   lhu          0000011   101       immediate[11:0]
+// S Type
+//   sb           0100011   000       immediate[11:5]
+//   sh           0100011   001       immediate[11:5]
+//   sw           0100011   010       immediate[11:5]
+// B Type
 //   beq          1100011   000       immediate
-//   lw	          0000011   010       immediate
-//   sw           0100011   010       immediate
+//   bne          1100011   001       0000000
+//   blt          1100011   100       0000000
+//   bge          1100011   101       0000000
+//   bltu         1100011   110       0000000
+//   bgeu         1100011   111       0000000
+
+
 //   jal          1101111   immediate immediate
 // U Type
 //   auipc        0010111   immediate immediate
 //   lui          0000000   000       0000000
-// B Type
-//   bge          1100011   101       0000000
-//   bgeu         1100011   111       0000000
-//   blt          1100011   100       0000000
-//   bltu         1100011   110       0000000
-//   bne          1100011   001       0000000
 //   jalr         0000000   000       0000000
-//   lb           0000000   000       0000000
-//   lbu          0000000   000       0000000
-//   lh           0000000   000       0000000
-//   lhu          0000000   000       0000000
-//   sb           0000000   000       0000000
-//   sh           0000000   000       0000000
-//   slli         0000000   000       0000000
-//   sltiu        0000000   000       0000000
-//   srai         0000000   000       0000000
-//   srli         0000000   000       0000000
-//   xori         0000000   000       0000000
-
-/*  
-#                            ,.--------._                                            #
-#                           /            ''.                                         #
-#                         ,'                \     |"\                /\          /\  #
-#                /"|     /                   \    |__"              ( \\        // ) #
-#               "_"|    /           z#####z   \  //                  \ \\      // /  #
-#                 \\  #####        ##------".  \//                    \_\\||||//_/   #
-#                  \\/-----\     /          ".  \                      \/ _  _ \     #
-#                   \|      \   |   ,,--..       \                    \/|(O)(O)|     #
-#                   | ,.--._ \  (  | ##   \)      \                  \/ |      |     #
-#                   |(  ##  )/   \ `-....-//       |///////////////_\/  \      /     #
-#                     '--'."      \                \              //     |____|      #
-#                  /'    /         ) --.            \            ||     /      \     #
-#               ,..|     \.________/    `-..         \   \       \|     \ 0  0 /     #
-#            _,##/ |   ,/   /   \           \         \   \       U    / \_//_/      #
-#          :###.-  |  ,/   /     \        /' ""\      .\        (     /              #
-#         /####|   |   (.___________,---',/    |       |\=._____|  |_/               #
-#        /#####|   |     \__|__|__|__|_,/             |####\    |  ||                #
-#       /######\   \      \__________/                /#####|   \  ||                #
-#      /|#######`. `\                                /#######\   | ||                #
-#     /++\#########\  \                      _,'    _/#########\ | ||                #
-#    /++++|#########|  \      .---..       ,/      ,'##########.\|_||  Donkey By     #
-#   //++++|#########\.  \.              ,-/      ,'########,+++++\\_\\ Hard'96       #
-#  /++++++|##########\.   '._        _,/       ,'######,''++++++++\                  #
-# |+++++++|###########|       -----."        _'#######' +++++++++++\                 #
-# |+++++++|############\.     \\     //      /#######/++++ S@yaN +++\                #
-#      ________________________\\___//______________________________________         #
-*/
-
 
 
 module testbench();
@@ -130,7 +103,7 @@ module testbench();
            end
 	end
      end
-endmodule // testbench
+     endmodule // testbench
 
 module riscvsingle (input  logic        clk, reset,
 		    output logic [31:0] PC,
@@ -140,7 +113,8 @@ module riscvsingle (input  logic        clk, reset,
 		    input  logic [31:0] ReadData);
    
    logic 				ALUSrc, RegWrite, Jump, Zero;
-   logic [1:0] 				ResultSrc, ImmSrc;
+   logic [1:0] 				ResultSrc;
+   logic [2:0]        ImmSrc;
    logic [2:0] 				ALUControl;
    
    controller c (Instr[6:0], Instr[14:12], Instr[30], Zero,
@@ -152,8 +126,7 @@ module riscvsingle (input  logic        clk, reset,
 		ImmSrc, ALUControl,
 		Zero, PC, Instr,
 		ALUResult, WriteData, ReadData);
-   
-endmodule // riscvsingle
+    endmodule // riscvsingle
 
 module controller (input  logic [6:0] op,
 		   input  logic [2:0] funct3,
@@ -163,28 +136,27 @@ module controller (input  logic [6:0] op,
 		   output logic       MemWrite,
 		   output logic       PCSrc, ALUSrc,
 		   output logic       RegWrite, Jump,
-		   output logic [1:0] ImmSrc,
+		   output logic [2:0] ImmSrc,
 		   output logic [2:0] ALUControl);
    
-   logic [1:0] 			      ALUOp;
+   logic [2:0] 			      ALUOp;
    logic 			      Branch;
    
    maindec md (op, ResultSrc, MemWrite, Branch,
 	       ALUSrc, RegWrite, Jump, ImmSrc, ALUOp);
    aludec ad (op[5], funct3, funct7b5, ALUOp, ALUControl);
    assign PCSrc = Branch & (Zero ^ funct3[0]) | Jump;
-   
-endmodule // controller
+   endmodule // controller
 
 module maindec (input  logic [6:0] op,
 		output logic [1:0] ResultSrc,
 		output logic 	   MemWrite,
 		output logic 	   Branch, ALUSrc,
 		output logic 	   RegWrite, Jump,
-		output logic [1:0] ImmSrc,
-		output logic [1:0] ALUOp);
+		output logic [2:0] ImmSrc,
+		output logic [2:0] ALUOp);
    
-   logic [10:0] 		   controls;
+   logic [11:0] 		   controls;
    
    assign {RegWrite, ImmSrc, ALUSrc, MemWrite,
 	   ResultSrc, Branch, ALUOp, Jump} = controls;
@@ -192,22 +164,25 @@ module maindec (input  logic [6:0] op,
    always_comb
      case(op)
        // RegWrite_ImmSrc_ALUSrc_MemWrite_ResultSrc_Branch_ALUOp_Jump
-       7'b0000011: controls = 11'b1_00_1_0_01_0_00_0; // lw
-       7'b0100011: controls = 11'b0_01_1_1_00_0_00_0; // sw
-       7'b0110011: controls = 11'b1_xx_0_0_00_0_10_0; // R–type
-       7'b1100011: controls = 11'b0_10_0_0_00_1_01_0; // beq
-       7'b0010011: controls = 11'b1_00_1_0_00_0_10_0; // I–type ALU
-       7'b1101111: controls = 11'b1_11_0_0_10_0_00_1; // jal
+       //    x    _ xxx  _  x   _   x    _   xx    _  x   _ xxx _  x
+       7'b0000011: controls = 13'b1_000_1_0_01_0_000_0; // lw
+       7'b0100011: controls = 13'b0_001_1_1_00_0_000_0; // sw
+       7'b0110011: controls = 13'b1_xxx_0_0_00_0_010_0; // R–type
+       7'b1100011: controls = 13'b0_010_0_0_00_1_001_0; // beq
+       7'b0010011: controls = 13'b1_000_1_0_00_0_010_0; // I–type ALU
+       7'b1101111: controls = 13'b1_011_0_0_10_0_000_1; // jal
+       7'b0110111: controls = 13'b1_100_1_0_00_0_100_0; // lui
        
-       default: controls = 11'bx_xx_x_x_xx_x_xx_x; // ???
+       7'b0110111: controls = 13'b1_100_1_0_00_0_100_0; // auipc
+       
+       default: controls = 13'bx_xxx_x_x_xx_x_xxx_x; // ???
      endcase // case (op)
-   
-endmodule // maindec
+    endmodule // maindec
 
 module aludec (input  logic       opb5,
 	       input  logic [2:0] funct3,
 	       input  logic 	  funct7b5,
-	       input  logic [1:0] ALUOp,
+	       input  logic [2:0] ALUOp,
 	       output logic [2:0] ALUControl);
    
    logic 			  RtypeSub;
@@ -215,11 +190,13 @@ module aludec (input  logic       opb5,
    assign RtypeSub = funct7b5 & opb5; // TRUE for R–type subtract
    always_comb
      case(ALUOp)
-       2'b00: ALUControl = 3'b000; // addition
-       2'b01: ALUControl = 3'b001; // subtraction
-       
-       2'b10: ALUControl = 3'b001; // Ours
-       2'b11: ALUControl = 3'b001; // Ours
+       3'b000: ALUControl = 3'b000; // addition
+       3'b001: ALUControl = 3'b001; // subtraction
+       3'b010: ALUControl = 3'b010; // and
+       3'b010: ALUControl = 3'b011; // or
+       3'b010: ALUControl = 3'b101; // slt
+       3'b011: ALUControl = 3'b100; // xor
+       3'b100: ALUControl = 3'b101; // set B
       default: case(funct3) // R–type or I–type ALU
 
 		  3'b000: if (RtypeSub)
@@ -236,14 +213,13 @@ module aludec (input  logic       opb5,
 		  default: ALUControl = 3'bxxx; // ???
 		endcase // case (funct3)       
      endcase // case (ALUOp)
-   
-endmodule // aludec
+     endmodule // aludec
 
 module datapath (input  logic        clk, reset,
 		 input  logic [1:0]  ResultSrc,
 		 input  logic 	     PCSrc, ALUSrc,
 		 input  logic 	     RegWrite,
-		 input  logic [1:0]  ImmSrc,
+		 input  logic [2:0]  ImmSrc,
 		 input  logic [2:0]  ALUControl,
 		 output logic 	     Zero,
 		 output logic [31:0] PC,
@@ -269,34 +245,33 @@ module datapath (input  logic        clk, reset,
    mux2 #(32)  srcbmux (WriteData, ImmExt, ALUSrc, SrcB);
    alu  alu (SrcA, SrcB, ALUControl, ALUResult, Zero);
    mux3 #(32) resultmux (ALUResult, ReadData, PCPlus4,ResultSrc, Result);
-
-endmodule // datapath
+   endmodule // datapath
 
 module adder (input  logic [31:0] a, b,
 	      output logic [31:0] y);
    
    assign y = a + b;
-   
-endmodule
+   endmodule
 
 module extend (input  logic [31:7] instr,
-	       input  logic [1:0]  immsrc,
+	       input  logic [2:0]  immsrc,
 	       output logic [31:0] immext);
    
    always_comb
      case(immsrc)
        // I−type
-       2'b00:  immext = {{20{instr[31]}}, instr[31:20]};
+       3'b000:  immext = {{20{instr[31]}}, instr[31:20]};
        // S−type (stores)
-       2'b01:  immext = {{20{instr[31]}}, instr[31:25], instr[11:7]};
+       3'b001:  immext = {{20{instr[31]}}, instr[31:25], instr[11:7]};
        // B−type (branches)
-       2'b10:  immext = {{20{instr[31]}}, instr[7], instr[30:25], instr[11:8], 1'b0};       
+       3'b010:  immext = {{20{instr[31]}}, instr[7], instr[30:25], instr[11:8], 1'b0};       
        // J−type (jal)
-       2'b11:  immext = {{12{instr[31]}}, instr[19:12], instr[20], instr[30:21], 1'b0};
+       3'b011:  immext = {{12{instr[31]}}, instr[19:12], instr[20], instr[30:21], 1'b0};
+       // U−type (jal)
+       3'b100:  immext = {instr[31:12],12'b0};
        default: immext = 32'bx; // undefined
      endcase // case (immsrc)
-   
-endmodule // extend
+   endmodule // extend
 
 module flopr #(parameter WIDTH = 8)
    (input  logic             clk, reset,
@@ -306,8 +281,7 @@ module flopr #(parameter WIDTH = 8)
    always_ff @(posedge clk, posedge reset)
      if (reset) q <= 0;
      else  q <= d;
-   
-endmodule // flopr
+   endmodule // flopr
 
 module flopenr #(parameter WIDTH = 8)
    (input  logic             clk, reset, en,
@@ -317,17 +291,15 @@ module flopenr #(parameter WIDTH = 8)
    always_ff @(posedge clk, posedge reset)
      if (reset)  q <= 0;
      else if (en) q <= d;
-   
-endmodule // flopenr
+   endmodule // flopenr
 
 module mux2 #(parameter WIDTH = 8)
-   (input  logic [WIDTH-1:0] d0, d1,
+   (input  logic [WIDTH-1:0] d0, d1, //ADD ANOTHER INPUT HERE???
     input logic 	     s,
     output logic [WIDTH-1:0] y);
    
   assign y = s ? d1 : d0;
-   
-endmodule // mux2
+   endmodule // mux2
 
 module mux3 #(parameter WIDTH = 8)
    (input  logic [WIDTH-1:0] d0, d1, d2,
@@ -335,8 +307,7 @@ module mux3 #(parameter WIDTH = 8)
     output logic [WIDTH-1:0] y);
    
   assign y = s[1] ? d2 : (s[0] ? d1 : d0);
-   
-endmodule // mux3
+   endmodule // mux3
 
 module top (input  logic        clk, reset,
 	    output logic [31:0] WriteData, DataAdr,
@@ -349,8 +320,7 @@ module top (input  logic        clk, reset,
 			   WriteData, ReadData);
    imem imem (PC, Instr);
    dmem dmem (clk, MemWrite, DataAdr, WriteData, ReadData);
-   
-endmodule // top
+   endmodule // top
 
 module imem (input  logic [31:0] a,
 	     output logic [31:0] rd);
@@ -358,8 +328,7 @@ module imem (input  logic [31:0] a,
    logic [31:0] 		 RAM[63:0];
    
    assign rd = RAM[a[31:2]]; // word aligned
-   
-endmodule // imem
+   endmodule // imem
 
 module dmem (input  logic        clk, we,
 	     input  logic [31:0] a, wd,
@@ -370,8 +339,7 @@ module dmem (input  logic        clk, we,
    assign rd = RAM[a[31:2]]; // word aligned
    always_ff @(posedge clk)
      if (we) RAM[a[31:2]] <= wd;
-   
-endmodule // dmem
+   endmodule // dmem
 
 module alu (input  logic [31:0] a, b,
             input  logic [2:0] 	alucontrol,
@@ -395,13 +363,13 @@ module alu (input  logic [31:0] a, b,
        3'b011:  result = a | b;       // or
        3'b101:  result = sum[31] ^ v; // slt       
        3'b100:  result = a ^ b;       // xor
+       3'b101:  result = b;           // set B
        default: result = 32'bx;
      endcase
 
    assign zero = (result == 32'b0);
    assign v = ~(alucontrol[0] ^ a[31] ^ b[31]) & (a[31] ^ sum[31]) & isAddSub;
-   
-endmodule // alu
+   endmodule // alu
 
 module regfile (input  logic        clk, 
 		input  logic 	    we3, 
@@ -421,6 +389,5 @@ module regfile (input  logic        clk,
 
    assign rd1 = (a1 != 0) ? rf[a1] : 0;
    assign rd2 = (a2 != 0) ? rf[a2] : 0;
-   
-endmodule // regfile
+   endmodule // regfile
 
