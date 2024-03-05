@@ -38,6 +38,7 @@
 //   lw	          0000011   010       immediate[11:0]
 //   lbu          0000011   100       immediate[11:0]
 //   lhu          0000011   101       immediate[11:0]
+//   jalr         1100111   000       immediate[11:0]
 // S Type
 //   sb           0100011   000       immediate[11:5]
 //   sh           0100011   001       immediate[11:5]
@@ -49,13 +50,16 @@
 //   bge          1100011   101       0000000
 //   bltu         1100011   110       0000000
 //   bgeu         1100011   111       0000000
-
-
-//   jal          1101111   immediate immediate
 // U Type
 //   auipc        0010111   immediate immediate
 //   lui          0000000   000       0000000
-//   jalr         0000000   000       0000000
+// J Type
+//   jal          1101111   immediate immediate
+
+
+
+
+
 
 
 module testbench();
@@ -164,7 +168,7 @@ module maindec (input  logic [6:0] op,
    always_comb
      case(op)
        // RegWrite_ImmSrc_ALUSrc_MemWrite_ResultSrc_Branch_ALUOp_Jump
-       //    x    _ xxx  _  x   _   x    _   xx    _  x   _ xxx _  x
+       //                        RW_ImS_A_M_RS_B_AOp_J
        7'b0000011: controls = 13'b1_000_1_0_01_0_000_0; // lw
        7'b0100011: controls = 13'b0_001_1_1_00_0_000_0; // sw
        7'b0110011: controls = 13'b1_xxx_0_0_00_0_010_0; // R–type
@@ -238,13 +242,13 @@ module datapath (input  logic        clk, reset,
    adder  pcaddbranch (PC, ImmExt, PCTarget);
    mux2 #(32)  pcmux (PCPlus4, PCTarget, PCSrc, PCNext);
    // register file logic
-   regfile  rf (clk, RegWrite, Instr[19:15], Instr[24:20],
-	       Instr[11:7], Result, SrcA, WriteData);
+   regfile  rf (clk, RegWrite, Instr[19:15], Instr[24:20], // rs1 and rs2 19:15, 24:20
+	       Instr[11:7], Result, SrcA, WriteData); // write data == rD2 :|
    extend  ext (Instr[31:7], ImmSrc, ImmExt);
    // ALU logic
    mux2 #(32)  srcbmux (WriteData, ImmExt, ALUSrc, SrcB);
    alu  alu (SrcA, SrcB, ALUControl, ALUResult, Zero);
-   mux3 #(32) resultmux (ALUResult, ReadData, PCPlus4,ResultSrc, Result);
+   mux3 #(32) resultmux (ALUResult, ReadData, PCPlus4, ResultSrc, Result);
    endmodule // datapath
 
 module adder (input  logic [31:0] a, b,
@@ -267,7 +271,7 @@ module extend (input  logic [31:7] instr,
        3'b010:  immext = {{20{instr[31]}}, instr[7], instr[30:25], instr[11:8], 1'b0};       
        // J−type (jal)
        3'b011:  immext = {{12{instr[31]}}, instr[19:12], instr[20], instr[30:21], 1'b0};
-       // U−type (jal)
+       // U−type
        3'b100:  immext = {instr[31:12],12'b0};
        default: immext = 32'bx; // undefined
      endcase // case (immsrc)
@@ -294,7 +298,7 @@ module flopenr #(parameter WIDTH = 8)
    endmodule // flopenr
 
 module mux2 #(parameter WIDTH = 8)
-   (input  logic [WIDTH-1:0] d0, d1, //ADD ANOTHER INPUT HERE???
+   (input  logic [WIDTH-1:0] d0, d1,
     input logic 	     s,
     output logic [WIDTH-1:0] y);
    
