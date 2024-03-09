@@ -122,11 +122,11 @@ module riscvsingle (input  logic        clk, reset,
    logic [2:0] 				ALUControl;
    
    controller c (Instr[6:0], Instr[14:12], Instr[30], Zero,
-		 ResultSrc, MemWrite, PCSrc,
-		 ALUSrc, RegWrite, Jump,
+		 ResultSrc, ALUSrc, MemWrite, PCSrc,
+		 RegWrite, Jump,
 		 ImmSrc, ALUControl);
-   datapath dp (clk, reset, ResultSrc, PCSrc,
-		ALUSrc, RegWrite,
+   datapath dp (clk, reset, ResultSrc, ALUSrc, PCSrc,
+		RegWrite,
 		ImmSrc, ALUControl,
 		Zero, PC, Instr,
 		ALUResult, WriteData, ReadData);
@@ -146,8 +146,7 @@ module controller (input  logic [6:0] op,
    logic [2:0] 			      ALUOp;
    logic 			      Branch;
    
-   maindec md (op, ResultSrc, MemWrite, Branch,
-	       ALUSrc, RegWrite, Jump, ImmSrc, ALUOp);
+   maindec md (op, ResultSrc, ALUSrc, MemWrite, Branch, RegWrite, Jump, ImmSrc, ALUOp);
    aludec ad (op[5], funct3, funct7b5, ALUOp, ALUControl);
    assign PCSrc = Branch & (Zero ^ funct3[0]) | Jump;
    endmodule // controller
@@ -160,7 +159,7 @@ module maindec (input  logic [6:0] op,
 		output logic [2:0] ImmSrc,
 		output logic [2:0] ALUOp);
    
-   logic [11:0] 		   controls;
+   logic [13:0] 		   controls;
    
    assign {RegWrite, ImmSrc, ALUSrc, MemWrite,
 	   ResultSrc, Branch, ALUOp, Jump} = controls;
@@ -201,7 +200,7 @@ module aludec (input  logic       opb5,
        3'b010: ALUControl = 3'b011; // or
        3'b010: ALUControl = 3'b101; // slt
        3'b011: ALUControl = 3'b100; // xor
-       3'b100: ALUControl = 3'b101; // set B
+       3'b100: ALUControl = 3'b110; // set B
       default: case(funct3) // R–type or I–type ALU
 
 		  3'b000: if (RtypeSub)
@@ -328,7 +327,7 @@ module top (input  logic        clk, reset,
 			   WriteData, ReadData);
    imem imem (PC, Instr);
    dmem dmem (clk, MemWrite, DataAdr, WriteData, ReadData);
-   endmodule // top
+   endmodule
 
 module imem (input  logic [31:0] a,
 	     output logic [31:0] rd);
@@ -354,11 +353,6 @@ module alu (input  logic [31:0] a, b,
             output logic [31:0] result,
             output logic 	zero);
 
-            /*****************************************************************
-
-                add a mux
-
-            ******************************************************************/
 
    logic [31:0] 	       condinvb, sum;
    logic 		       v;              // overflow
@@ -378,7 +372,7 @@ module alu (input  logic [31:0] a, b,
        3'b011:  result = a | b;       // or
        3'b101:  result = sum[31] ^ v; // slt       
        3'b100:  result = a ^ b;       // xor
-       3'b101:  result = b;           // set B
+       3'b110:  result = b;           // set B
        default: result = 32'bx;
      endcase
 

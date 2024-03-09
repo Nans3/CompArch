@@ -41,6 +41,8 @@ do wave.do
 -- display input and output signals as hexidecimal values
 # Diplays All Signals recursively
 # add wave -hex -r /stimulus/*
+add wave -noupdate -divider -height 32 "ANGY"
+add wave -dec /testbench/DataAdr
 add wave -noupdate -divider -height 32 "Top"
 add wave -hex /testbench/dut/*
 add wave -noupdate -divider -height 32 "Instructions"
@@ -73,7 +75,7 @@ WaveRestoreZoom {0 ps} {200 ns}
 configure wave -namecolwidth 250
 configure wave -valuecolwidth 100
 configure wave -justifyvalue left
-configure wave -signalnamewidth 1
+configure wave -signalnamewidth 10
 configure wave -snapdistance 10
 configure wave -datasetprefix 0
 configure wave -rowmargin 4

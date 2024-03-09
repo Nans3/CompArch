@@ -13,10 +13,3 @@
 # //
 # .\riscv_single.do
 # invalid command name ".iscv_single.do"
-.\riscv_single.do
-# invalid command name ".iscv_single.do"
-.\\riscv_single.do
-# invalid command name ".\riscv_single.do"
-
-.\\riscv_single.do
-# invalid command name ".\riscv_single.do"

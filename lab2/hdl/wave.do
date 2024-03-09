@@ -102,3 +102,115 @@ radix define Functions {
     "16#000065A4#" "_halt" -color "green",
     -default hexadecimal
 }
+quietly WaveActivateNextPane {} 0
+add wave -noupdate -divider -height 32 ANGY
+add wave -noupdate -radix decimal /testbench/DataAdr
+add wave -noupdate -divider -height 32 Top
+add wave -noupdate -radix hexadecimal /testbench/dut/clk
+add wave -noupdate -radix hexadecimal /testbench/dut/reset
+add wave -noupdate -radix hexadecimal /testbench/dut/WriteData
+add wave -noupdate -radix hexadecimal /testbench/dut/DataAdr
+add wave -noupdate -radix hexadecimal /testbench/dut/MemWrite
+add wave -noupdate -radix hexadecimal /testbench/dut/PC
+add wave -noupdate -radix hexadecimal /testbench/dut/Instr
+add wave -noupdate -radix hexadecimal /testbench/dut/ReadData
+add wave -noupdate -divider -height 32 Instructions
+add wave -noupdate -expand -group Instructions /testbench/dut/rv32single/reset
+add wave -noupdate -expand -group Instructions -color {Orange Red} /testbench/dut/rv32single/PC
+add wave -noupdate -expand -group Instructions -color Orange /testbench/dut/rv32single/Instr
+add wave -noupdate -expand -group Instructions -color Orange -radix Instructions /testbench/dut/rv32single/Instr
+add wave -noupdate -expand -group Instructions -color Orange /testbench/dut/rv32single/dp/Instr
+add wave -noupdate -expand -group Instructions -color Orange -radix Instructions /testbench/dut/rv32single/dp/Instr
+add wave -noupdate -divider -height 32 Datapath
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/dp/clk
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/dp/reset
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/dp/ResultSrc
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/dp/ALUSrc
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/dp/PCSrc
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/dp/RegWrite
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/dp/ImmSrc
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/dp/ALUControl
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/dp/Zero
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/dp/PC
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/dp/Instr
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/dp/ALUResult
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/dp/WriteData
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/dp/ReadData
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/dp/PCNext
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/dp/PCPlus4
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/dp/PCTarget
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/dp/ImmExt
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/dp/SrcA
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/dp/SrcB
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/dp/SrcAMuxout
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/dp/Result
+add wave -noupdate -divider -height 32 Control
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/c/op
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/c/funct3
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/c/funct7b5
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/c/Zero
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/c/ResultSrc
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/c/ALUSrc
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/c/MemWrite
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/c/PCSrc
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/c/RegWrite
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/c/Jump
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/c/ImmSrc
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/c/ALUControl
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/c/ALUOp
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/c/Branch
+add wave -noupdate -divider -height 32 {Main Decoder}
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/c/md/op
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/c/md/ResultSrc
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/c/md/ALUSrc
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/c/md/MemWrite
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/c/md/Branch
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/c/md/RegWrite
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/c/md/Jump
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/c/md/ImmSrc
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/c/md/ALUOp
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/c/md/controls
+add wave -noupdate -divider -height 32 {ALU Decoder}
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/c/ad/opb5
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/c/ad/funct3
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/c/ad/funct7b5
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/c/ad/ALUOp
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/c/ad/ALUControl
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/c/ad/RtypeSub
+add wave -noupdate -divider -height 32 {Data Memory}
+add wave -noupdate -radix hexadecimal /testbench/dut/dmem/clk
+add wave -noupdate -radix hexadecimal /testbench/dut/dmem/we
+add wave -noupdate -radix hexadecimal /testbench/dut/dmem/a
+add wave -noupdate -radix hexadecimal /testbench/dut/dmem/wd
+add wave -noupdate -radix hexadecimal /testbench/dut/dmem/rd
+add wave -noupdate -divider -height 32 {Instruction Memory}
+add wave -noupdate -radix hexadecimal /testbench/dut/imem/a
+add wave -noupdate -radix hexadecimal /testbench/dut/imem/rd
+add wave -noupdate -divider -height 32 {Register File}
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/dp/rf/clk
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/dp/rf/we3
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/dp/rf/a1
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/dp/rf/a2
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/dp/rf/a3
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/dp/rf/wd3
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/dp/rf/rd1
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/dp/rf/rd2
+add wave -noupdate -radix hexadecimal /testbench/dut/rv32single/dp/rf/rf
+TreeUpdate [SetDefaultTree]
+WaveRestoreCursors {{Cursor 1} {46 ns} 0}
+quietly wave cursor active 1
+configure wave -namecolwidth 142
+configure wave -valuecolwidth 100
+configure wave -justifyvalue left
+configure wave -signalnamewidth 1
+configure wave -snapdistance 10
+configure wave -datasetprefix 0
+configure wave -rowmargin 4
+configure wave -childrowmargin 2
+configure wave -gridoffset 0
+configure wave -gridperiod 1
+configure wave -griddelta 40
+configure wave -timeline 0
+configure wave -timelineunits ns
+update
+WaveRestoreZoom {0 ns} {202 ns}
