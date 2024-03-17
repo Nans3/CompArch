@@ -11,13 +11,13 @@
 # //  is prohibited from disclosure under the Trade Secrets Act,
 # //  18 U.S.C. Section 1905.
 # //
-# do {.\riscv_single.do}
+# do riscv_single.do
 # ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is jstine@sakuya.ecen.okstate.edu.
 # ** Warning: (vdel-134) Unable to remove locked optimized design "_opt1".  Locker is tylcurt@CEAT-ENDV350-12.
 # ** Warning: (vlib-34) Library already exists at "work".
 # Errors: 0, Warnings: 1
 # Model Technology ModelSim SE-64 vlog 2021.3 Compiler 2021.07 Jul 13 2021
-# Start time: 17:24:32 on Mar 08,2024
+# Start time: 14:42:26 on Mar 16,2024
 # vlog -reportprogress 300 riscv_single.sv 
 # -- Compiling module testbench
 # -- Compiling module riscvsingle
@@ -40,329 +40,13 @@
 # Top level modules:
 # 	testbench
 # 	flopenr
-# End time: 17:24:32 on Mar 08,2024, Elapsed time: 0:00:00
+# End time: 14:42:26 on Mar 16,2024, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vsim -debugdb -voptargs="+acc" work.testbench 
-# Start time: 17:24:32 on Mar 08,2024
+# Start time: 14:42:26 on Mar 16,2024
 # ** Note: (vsim-3812) Design is being optimized...
 # ** Note: (vsim-8611) Generating debug db.
-# ** Note: (vopt-4301) Memory core inferred for signal 'RAM' width=32, depth=256, type=RAM at location riscv_single.sv:345
-# Loading sv_std.std
-# Loading work.testbench(fast)
-# Loading work.top(fast)
-# Loading work.riscvsingle(fast)
-# Loading work.controller(fast)
-# Loading work.maindec(fast)
-# Loading work.aludec(fast)
-# Loading work.datapath(fast)
-# Loading work.flopr(fast)
-# Loading work.adder(fast)
-# Loading work.mux2(fast)
-# Loading work.regfile(fast)
-# Loading work.extend(fast)
-# Loading work.alu(fast)
-# Loading work.mux3(fast)
-# Loading work.imem(fast)
-# Loading work.dmem(fast)
-# ** Warning: (vsim-3015) [PCDPC] - Port size (2) does not match connection size (1) for port 'ALUSrc'. The port definition is at: riscv_single.sv(139).
-#    Time: 0 ns  Iteration: 0  Instance: /testbench/dut/rv32single/c File: riscv_single.sv Line: 124
-# ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (2) for port 'PCSrc'. The port definition is at: riscv_single.sv(141).
-#    Time: 0 ns  Iteration: 0  Instance: /testbench/dut/rv32single/c File: riscv_single.sv Line: 124
-# ** Warning: (vsim-3015) [PCDPC] - Port size (2) does not match connection size (1) for port 'ALUSrc'. The port definition is at: riscv_single.sv(156).
-#    Time: 0 ns  Iteration: 0  Instance: /testbench/dut/rv32single/c/md File: riscv_single.sv Line: 149
-# ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (2) for port 'Branch'. The port definition is at: riscv_single.sv(158).
-#    Time: 0 ns  Iteration: 0  Instance: /testbench/dut/rv32single/c/md File: riscv_single.sv Line: 149
-# ** Note: (vsim-8900) Creating design debug database vsim.dbg.
-# ** Error: (vsim-8357) Internal debugDB error id:ct1  ret:1 table context_tbl already exists
-# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
-#           File in use by: tylcurt  Hostname: CEAT-ENDV350-12  ProcessID: 8348
-#           Attempting to use alternate WLF file "./wlfts256bx".
-# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlfts256bx
-# Simulation failed
-# ** Note: $stop    : riscv_single.sv(106)
-#    Time: 85 ns  Iteration: 1  Instance: /testbench
-# Break in Module testbench at riscv_single.sv line 106
-# Debug data file does not match loaded design.
-# Debug data file does not match loaded design.
-do {.\riscv_single.do}
-# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is jstine@sakuya.ecen.okstate.edu.
-# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt1".  Locker is tylcurt@CEAT-ENDV350-12.
-# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt2".  Locker is tylcurt@CEAT-ENDV350-12.
-# Error 31: Unable to unlink file "C:/Users/tylcurt/Documents/GitHub/CompArch/lab2/hdl/work/_dbcontainer/#64_opt2/__mti.dbg".
-# Error 133: Unable to remove directory "C:/Users/tylcurt/Documents/GitHub/CompArch/lab2/hdl/work/_dbcontainer/#64_opt2".
-# Error 133: Unable to remove directory "C:/Users/tylcurt/Documents/GitHub/CompArch/lab2/hdl/work/_dbcontainer".
-# ** Warning: (vlib-34) Library already exists at "work".
-# Errors: 0, Warnings: 1
-# Model Technology ModelSim SE-64 vlog 2021.3 Compiler 2021.07 Jul 13 2021
-# Start time: 17:29:30 on Mar 08,2024
-# vlog -reportprogress 300 riscv_single.sv 
-# -- Compiling module testbench
-# -- Compiling module riscvsingle
-# -- Compiling module controller
-# -- Compiling module maindec
-# -- Compiling module aludec
-# -- Compiling module datapath
-# -- Compiling module adder
-# -- Compiling module extend
-# -- Compiling module flopr
-# -- Compiling module flopenr
-# -- Compiling module mux2
-# -- Compiling module mux3
-# -- Compiling module top
-# -- Compiling module imem
-# -- Compiling module dmem
-# -- Compiling module alu
-# -- Compiling module regfile
-# 
-# Top level modules:
-# 	testbench
-# 	flopenr
-# End time: 17:29:30 on Mar 08,2024, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# End time: 17:29:31 on Mar 08,2024, Elapsed time: 0:04:59
-# Errors: 1, Warnings: 6
-# vsim -debugdb -voptargs="+acc" work.testbench 
-# Start time: 17:29:31 on Mar 08,2024
-# ** Note: (vsim-8009) Loading existing optimized design _opt2
-# Loading sv_std.std
-# Loading work.testbench(fast)
-# Loading work.top(fast)
-# Loading work.riscvsingle(fast)
-# Loading work.controller(fast)
-# Loading work.maindec(fast)
-# Loading work.aludec(fast)
-# Loading work.datapath(fast)
-# Loading work.flopr(fast)
-# Loading work.adder(fast)
-# Loading work.mux2(fast)
-# Loading work.regfile(fast)
-# Loading work.extend(fast)
-# Loading work.alu(fast)
-# Loading work.mux3(fast)
-# Loading work.imem(fast)
-# Loading work.dmem(fast)
-# ** Warning: (vsim-3015) [PCDPC] - Port size (2) does not match connection size (1) for port 'ALUSrc'. The port definition is at: riscv_single.sv(139).
-#    Time: 0 ns  Iteration: 0  Instance: /testbench/dut/rv32single/c File: riscv_single.sv Line: 124
-# ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (2) for port 'PCSrc'. The port definition is at: riscv_single.sv(141).
-#    Time: 0 ns  Iteration: 0  Instance: /testbench/dut/rv32single/c File: riscv_single.sv Line: 124
-# ** Warning: (vsim-3015) [PCDPC] - Port size (2) does not match connection size (1) for port 'ALUSrc'. The port definition is at: riscv_single.sv(156).
-#    Time: 0 ns  Iteration: 0  Instance: /testbench/dut/rv32single/c/md File: riscv_single.sv Line: 149
-# ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (2) for port 'Branch'. The port definition is at: riscv_single.sv(158).
-#    Time: 0 ns  Iteration: 0  Instance: /testbench/dut/rv32single/c/md File: riscv_single.sv Line: 149
-# ** Note: (vsim-8900) Creating design debug database vsim.dbg.
-# ** Error: (vsim-8357) Internal debugDB error id:ct1  ret:1 table context_tbl already exists
-# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
-#           File in use by: tylcurt  Hostname: CEAT-ENDV350-12  ProcessID: 8348
-#           Attempting to use alternate WLF file "./wlft2yk9q2".
-# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlft2yk9q2
-# Simulation failed
-# ** Note: $stop    : riscv_single.sv(106)
-#    Time: 85 ns  Iteration: 1  Instance: /testbench
-# Break in Module testbench at riscv_single.sv line 106
-# Debug data file does not match loaded design.
-# Debug data file does not match loaded design.
-write format wave -window .main_pane.wave.interior.cs.body.pw.wf C:/Users/tylcurt/Documents/GitHub/CompArch/lab2/hdl/wave.do
-do {.\riscv_single.do}
-# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is jstine@sakuya.ecen.okstate.edu.
-# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt1".  Locker is tylcurt@CEAT-ENDV350-12.
-# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt2".  Locker is tylcurt@CEAT-ENDV350-12.
-# Error 31: Unable to unlink file "C:/Users/tylcurt/Documents/GitHub/CompArch/lab2/hdl/work/_dbcontainer/#64_opt2/__mti.dbg".
-# Error 133: Unable to remove directory "C:/Users/tylcurt/Documents/GitHub/CompArch/lab2/hdl/work/_dbcontainer/#64_opt2".
-# Error 133: Unable to remove directory "C:/Users/tylcurt/Documents/GitHub/CompArch/lab2/hdl/work/_dbcontainer".
-# ** Warning: (vlib-34) Library already exists at "work".
-# Errors: 0, Warnings: 1
-# Model Technology ModelSim SE-64 vlog 2021.3 Compiler 2021.07 Jul 13 2021
-# Start time: 17:51:55 on Mar 08,2024
-# vlog -reportprogress 300 riscv_single.sv 
-# -- Compiling module testbench
-# -- Compiling module riscvsingle
-# -- Compiling module controller
-# -- Compiling module maindec
-# -- Compiling module aludec
-# -- Compiling module datapath
-# -- Compiling module adder
-# -- Compiling module extend
-# -- Compiling module flopr
-# -- Compiling module flopenr
-# -- Compiling module mux2
-# -- Compiling module mux3
-# -- Compiling module top
-# -- Compiling module imem
-# -- Compiling module dmem
-# -- Compiling module alu
-# -- Compiling module regfile
-# 
-# Top level modules:
-# 	testbench
-# 	flopenr
-# End time: 17:51:55 on Mar 08,2024, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# End time: 17:51:59 on Mar 08,2024, Elapsed time: 0:22:28
-# Errors: 1, Warnings: 6
-# vsim -debugdb -voptargs="+acc" work.testbench 
-# Start time: 17:51:59 on Mar 08,2024
-# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
-# ** Note: (vsim-8611) Generating debug db.
-# Loading sv_std.std
-# Loading work.testbench(fast)
-# Loading work.top(fast)
-# Loading work.riscvsingle(fast)
-# Loading work.controller(fast)
-# Loading work.maindec(fast)
-# Loading work.aludec(fast)
-# Loading work.datapath(fast)
-# Loading work.flopr(fast)
-# Loading work.adder(fast)
-# Loading work.mux2(fast)
-# Loading work.regfile(fast)
-# Loading work.extend(fast)
-# Loading work.alu(fast)
-# Loading work.mux3(fast)
-# Loading work.imem(fast)
-# Loading work.dmem(fast)
-# ** Warning: (vsim-3015) [PCDPC] - Port size (2) does not match connection size (1) for port 'ALUSrc'. The port definition is at: riscv_single.sv(139).
-#    Time: 0 ns  Iteration: 0  Instance: /testbench/dut/rv32single/c File: riscv_single.sv Line: 124
-# ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (2) for port 'PCSrc'. The port definition is at: riscv_single.sv(141).
-#    Time: 0 ns  Iteration: 0  Instance: /testbench/dut/rv32single/c File: riscv_single.sv Line: 124
-# ** Warning: (vsim-3015) [PCDPC] - Port size (2) does not match connection size (1) for port 'ALUSrc'. The port definition is at: riscv_single.sv(156).
-#    Time: 0 ns  Iteration: 0  Instance: /testbench/dut/rv32single/c/md File: riscv_single.sv Line: 149
-# ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (2) for port 'Branch'. The port definition is at: riscv_single.sv(158).
-#    Time: 0 ns  Iteration: 0  Instance: /testbench/dut/rv32single/c/md File: riscv_single.sv Line: 149
-# ** Note: (vsim-8900) Creating design debug database vsim.dbg.
-# ** Error: (vsim-8357) Internal debugDB error id:ct1  ret:1 table context_tbl already exists
-# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
-#           File in use by: tylcurt  Hostname: CEAT-ENDV350-12  ProcessID: 8348
-#           Attempting to use alternate WLF file "./wlftqnzfsx".
-# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlftqnzfsx
-# Simulation failed
-# ** Note: $stop    : riscv_single.sv(106)
-#    Time: 85 ns  Iteration: 1  Instance: /testbench
-# Break in Module testbench at riscv_single.sv line 106
-# Debug data file does not match loaded design.
-# Debug data file does not match loaded design.
-do {.\riscv_single.do}
-# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is jstine@sakuya.ecen.okstate.edu.
-# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt1".  Locker is tylcurt@CEAT-ENDV350-12.
-# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt2".  Locker is tylcurt@CEAT-ENDV350-12.
-# Error 31: Unable to unlink file "C:/Users/tylcurt/Documents/GitHub/CompArch/lab2/hdl/work/_dbcontainer/#64_opt2/__mti.dbg".
-# Error 133: Unable to remove directory "C:/Users/tylcurt/Documents/GitHub/CompArch/lab2/hdl/work/_dbcontainer/#64_opt2".
-# Error 133: Unable to remove directory "C:/Users/tylcurt/Documents/GitHub/CompArch/lab2/hdl/work/_dbcontainer".
-# ** Warning: (vlib-34) Library already exists at "work".
-# Errors: 0, Warnings: 1
-# Model Technology ModelSim SE-64 vlog 2021.3 Compiler 2021.07 Jul 13 2021
-# Start time: 17:56:04 on Mar 08,2024
-# vlog -reportprogress 300 riscv_single.sv 
-# -- Compiling module testbench
-# -- Compiling module riscvsingle
-# -- Compiling module controller
-# -- Compiling module maindec
-# -- Compiling module aludec
-# -- Compiling module datapath
-# -- Compiling module adder
-# -- Compiling module extend
-# -- Compiling module flopr
-# -- Compiling module flopenr
-# -- Compiling module mux2
-# -- Compiling module mux3
-# -- Compiling module top
-# -- Compiling module imem
-# -- Compiling module dmem
-# -- Compiling module alu
-# -- Compiling module regfile
-# 
-# Top level modules:
-# 	testbench
-# 	flopenr
-# End time: 17:56:04 on Mar 08,2024, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# End time: 17:56:06 on Mar 08,2024, Elapsed time: 0:04:07
-# Errors: 1, Warnings: 6
-# vsim -debugdb -voptargs="+acc" work.testbench 
-# Start time: 17:56:06 on Mar 08,2024
-# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
-# ** Note: (vsim-8611) Generating debug db.
-# Loading sv_std.std
-# Loading work.testbench(fast)
-# Loading work.top(fast)
-# Loading work.riscvsingle(fast)
-# Loading work.controller(fast)
-# Loading work.maindec(fast)
-# Loading work.aludec(fast)
-# Loading work.datapath(fast)
-# Loading work.flopr(fast)
-# Loading work.adder(fast)
-# Loading work.mux2(fast)
-# Loading work.regfile(fast)
-# Loading work.extend(fast)
-# Loading work.alu(fast)
-# Loading work.mux3(fast)
-# Loading work.imem(fast)
-# Loading work.dmem(fast)
-# ** Warning: (vsim-3015) [PCDPC] - Port size (2) does not match connection size (1) for port 'ALUSrc'. The port definition is at: riscv_single.sv(156).
-#    Time: 0 ns  Iteration: 0  Instance: /testbench/dut/rv32single/c/md File: riscv_single.sv Line: 149
-# ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (2) for port 'Branch'. The port definition is at: riscv_single.sv(158).
-#    Time: 0 ns  Iteration: 0  Instance: /testbench/dut/rv32single/c/md File: riscv_single.sv Line: 149
-# ** Note: (vsim-8900) Creating design debug database vsim.dbg.
-# ** Error: (vsim-8357) Internal debugDB error id:ct1  ret:1 table context_tbl already exists
-# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
-#           File in use by: tylcurt  Hostname: CEAT-ENDV350-12  ProcessID: 8348
-#           Attempting to use alternate WLF file "./wlftzwg3gw".
-# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlftzwg3gw
-# Debug data file does not match loaded design.
-# Debug data file does not match loaded design.
-# ** Error: Could not open the database because of the following problem accessing the required debug information:
-# Debug data file does not match loaded design.
-# Error in macro ././riscv_single.do line 88
-# Could not open the database because of the following problem accessing the required debug information:
-# Debug data file does not match loaded design.
-#     while executing
-# "add schematic -full sim:/testbench/dut/rv32single"
-do {.\riscv_single.do}
-# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is jstine@sakuya.ecen.okstate.edu.
-# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt1".  Locker is tylcurt@CEAT-ENDV350-12.
-# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt2".  Locker is tylcurt@CEAT-ENDV350-12.
-# Error 31: Unable to unlink file "C:/Users/tylcurt/Documents/GitHub/CompArch/lab2/hdl/work/_dbcontainer/#64_opt2/__mti.dbg".
-# Error 133: Unable to remove directory "C:/Users/tylcurt/Documents/GitHub/CompArch/lab2/hdl/work/_dbcontainer/#64_opt2".
-# Error 133: Unable to remove directory "C:/Users/tylcurt/Documents/GitHub/CompArch/lab2/hdl/work/_dbcontainer".
-# ** Warning: (vlib-34) Library already exists at "work".
-# Errors: 0, Warnings: 1
-# Model Technology ModelSim SE-64 vlog 2021.3 Compiler 2021.07 Jul 13 2021
-# Start time: 17:59:31 on Mar 08,2024
-# vlog -reportprogress 300 riscv_single.sv 
-# -- Compiling module testbench
-# -- Compiling module riscvsingle
-# -- Compiling module controller
-# -- Compiling module maindec
-# -- Compiling module aludec
-# -- Compiling module datapath
-# -- Compiling module adder
-# -- Compiling module extend
-# -- Compiling module flopr
-# -- Compiling module flopenr
-# -- Compiling module mux2
-# -- Compiling module mux3
-# -- Compiling module top
-# -- Compiling module imem
-# -- Compiling module dmem
-# -- Compiling module alu
-# -- Compiling module regfile
-# 
-# Top level modules:
-# 	testbench
-# 	flopenr
-# End time: 17:59:31 on Mar 08,2024, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# End time: 17:59:33 on Mar 08,2024, Elapsed time: 0:03:27
-# Errors: 2, Warnings: 4
-# vsim -debugdb -voptargs="+acc" work.testbench 
-# Start time: 17:59:33 on Mar 08,2024
-# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
-# ** Note: (vsim-8611) Generating debug db.
-# ** Note: (vopt-4301) Memory core inferred for signal 'RAM' width=32, depth=256, type=RAM at location riscv_single.sv:344
+# ** Note: (vopt-4301) Memory core inferred for signal 'RAM' width=32, depth=256, type=RAM at location riscv_single.sv:299
 # Loading sv_std.std
 # Loading work.testbench(fast)
 # Loading work.top(fast)
@@ -384,14 +68,16 @@ do {.\riscv_single.do}
 # ** Error: (vsim-8357) Internal debugDB error id:ct1  ret:1 table context_tbl already exists
 # ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
 #           File in use by: tylcurt  Hostname: CEAT-ENDV350-12  ProcessID: 8348
-#           Attempting to use alternate WLF file "./wlft87whif".
+#           Attempting to use alternate WLF file "./wlftrh1gss".
 # ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlft87whif
-# Simulation failed
-# ** Note: $stop    : riscv_single.sv(106)
-#    Time: 105 ns  Iteration: 1  Instance: /testbench
-# Break in Module testbench at riscv_single.sv line 106
+#           Using alternate file: ./wlftrh1gss
+# ** UI-Msg: (vish-4014) No objects found matching '/testbench/dut/rv32single/dp/SrcAMuxout'.
+# Executing ONERROR command at macro ./wave.do line 145
+# Simulation succeeded
+# ** Note: $stop    : riscv_single.sv(66)
+#    Time: 195 ns  Iteration: 1  Instance: /testbench
+# Break in Module testbench at riscv_single.sv line 66
 # Debug data file does not match loaded design.
 # Debug data file does not match loaded design.
-# End time: 18:01:19 on Mar 08,2024, Elapsed time: 0:01:46
+# End time: 14:43:00 on Mar 16,2024, Elapsed time: 0:00:34
 # Errors: 1, Warnings: 2
