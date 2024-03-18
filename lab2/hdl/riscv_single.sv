@@ -63,7 +63,7 @@ module testbench();
    logic [31:0] currentInstruction;
 
    // PC flag for exception
-   logic PCException
+   logic PCException;
    //********************
 
    logic [31:0] WriteData;
@@ -105,7 +105,7 @@ module testbench();
 
     always @(negedge clk)
       begin
-        if (Ecall = currentInstruction)
+        if (Ecall == currentInstruction)
         begin
           $display("Simulation succeeded");
           $stop;
@@ -129,13 +129,15 @@ module testbench();
 
   endmodule // testbench
 
-module riscvsingle (input  logic clk, reset, PCException
+module riscvsingle (
+        input  logic clk, reset, PCException,
 		    output logic [31:0] PC,
 		    input  logic [31:0] Instr,
 		    output logic 	MemWrite,
 		    output logic [31:0] ALUResult, WriteData,
-		    input  logic [31:0] ReadData
-        output logic MemAccess);
+		    input  logic [31:0] ReadData,
+        output logic MemAccess
+        );
    
    logic 				RegWrite, Jump, Zero, Load, Store, storeInstFlag;
    logic [1:0] 		ALUSrc, ResultSrc, upperImm;
@@ -170,7 +172,7 @@ module controller (input  logic [6:0] op,
 		   input  logic       Zero,
 		   output logic [1:0] ResultSrc,
 		   output logic       MemWrite,
-		   output logic       PCSrc,,
+		   output logic       PCSrc,
 		   output logic       RegWrite, Jump,
        output logic [1:0] upperImm,
        // Immsrc, and alucontrole expanded
@@ -262,7 +264,7 @@ module aludec (input  logic       opb5,
 
       default: case(funct3) // works for R or I
         3'b000: begin
-          if(RSubtraction)
+          if(RtypeSub)
           ALUControl = 4'b0001; // subtraction
           else
           ALUControl = 4'b0000; // add
@@ -289,7 +291,7 @@ module aludec (input  logic       opb5,
             storeInstFlag = 1'b0;
         end
           3'b101: begin
-            if(shiftRight) ALUControl = 4'b0111; // sra, srai
+            if(rightShift) ALUControl = 4'b0111; // sra, srai
             else ALUControl = 4'b1000; // srl, srli
             storeInstFlag = 1'b1;
         end
@@ -337,11 +339,11 @@ module loaddec (
     3'b010: loadctrl = 3'b010;
     3'b100: loadctrl = 3'b100;
     3'b101: loadctrl = 3'b101;
-    default: loadctrl = 3'bxxx
+    default: loadctrl = 3'bxxx;
   endcase
   end
   else 
-    loadctrl = 3'xxx;
+    loadctrl = 3'bx;
 
   endmodule
 
@@ -352,13 +354,12 @@ module storedec (
     );
     always_comb
       if(Store)begin 
-      case(funct3) 
-      3'b000: storectl = 3'b000;
-      3'b001: storectl = 3'b001;
-      3'b010: storectl = 3'b010;
+      case(funt3) 
+      3'b000: storectrl = 3'b000;
+      3'b001: storectrl = 3'b001;
+      3'b010: storectrl = 3'b010;
       default: storectrl = 3'bxxx;
       endcase
-      else
       end
 
       else 
@@ -391,12 +392,12 @@ module branchdec (
     endcase
   end
   else 
-  branchflag = 1'0;
+  branchflag = 1'b0;
 
   endmodule
 
-module datapath (
-     input  logic        clk, reset, PCException
+module datapath(
+     input  logic        clk, reset, PCException,
 		 input  logic [1:0]  ALUSrc, ResultSrc,
 		 input  logic 	     PCSrc, 
 		 input  logic 	     RegWrite,
@@ -407,9 +408,9 @@ module datapath (
 		 output logic [31:0] PC,
 		 input  logic [31:0] Instr,
 		 output logic [31:0] ALUResult, WriteData,
-		 input  logic [31:0] ReadData
+		 input  logic [31:0] ReadData,
      // additional
-     input logic [1:0] upperImm
+     input logic [1:0] upperImm,
      input logic [2:0] branchctrl, loadctrl, storectrl,
      input logic Jump,
      input logic storeInstFlag
@@ -441,14 +442,14 @@ module datapath (
    extend  ext (Instr[31:7], ImmSrc, ImmExt, storeInstFlag);
 
    // ALU logic 
-   mux2 #(32)  srcbmux (WriteData2, ImmExt, ALUSrc[0], SrcC);
+   mux2 #(32)  srccmux (WriteData2, ImmExt, ALUSrc[0], SrcC);
    alu  alu (SrcA, SrcB, ALUControl, ALUResult, Zero, upperImm);
    mux3 #(32) resultmux (ALUResult, ReadData, PCPlus4,ResultSrc, Result);
 
    // Make sure to update names in these
    storealu storealu(storectrl, WriteData2, ALUResult, ReadData, WriteData);
    shift12 #(32) srcbmux(SrcC, Pc, upperImm, SrcB);
-   loadalu loadalu(loadctrl, ReadData, ALUResult, ReadData2)
+   loadalu loadalu(loadctrl, ReadData, ALUResult, ReadData2);
 
   endmodule // datapath
 
@@ -481,7 +482,7 @@ module extend (
           // extended immsrc
 	       input  logic [2:0]  immsrc,
 
-	       output logic [31:0] immext
+	       output logic [31:0] immext,
          input logic storeInstFlag);
    
    always_comb
@@ -493,7 +494,7 @@ module extend (
                     immext = {{20{instr[31]}}, instr[31:20]};
 
                   else
-                    imdext = {{20{instr[31]}}, instr[24:20]};
+                    immext = {{20{instr[31]}}, instr[24:20]};
         end
 
        // S−type (stores)
@@ -506,7 +507,7 @@ module extend (
        3'b011:  immext = {{12{instr[31]}}, instr[19:12], instr[20], instr[30:21], 1'b0};
        
        // U-type
-       3'b100:  imdext = {{12{instr[31:12]}}, instr[31:12]};
+       3'b100:  immext = {{12{instr[31:12]}}, instr[31:12]};
 
        default: immext = 32'bx; // undefined
 
@@ -569,7 +570,7 @@ module shift12 #(parameter WIDTH = 8)
 module top (
       input  logic clk, reset, PCException,
 	    output logic [31:0] WriteData, DataAdr,
-	    output logic 	MemWrite
+	    output logic 	MemWrite,
       // Added
       output logic [31:0] currentInstruction,
       output logic MemAccess);
@@ -615,7 +616,7 @@ module alu (input  logic [31:0] a, b,
             // increased alucontrold 
             input  logic [3:0] 	alucontrol,
             output logic [31:0] result,
-            output logic 	zero
+            output logic 	zero,
             input logic [1:0] upperImm);
 
    logic [31:0] 	       condinvb, sum, signop; // added signop maybe change name
@@ -637,7 +638,7 @@ module alu (input  logic [31:0] a, b,
        4'b0011: result = a | b; // or
        4'b0100: result = a << (b & 32'h1f); //sll
        4'b0101: result = sum[31] ^ v; //slt
-       4'b0110: result = (unsigned'(a) < b) ?1 : 0 // srl
+       4'b0110: result = (unsigned'(a) < b) ?1 : 0; // srl
        4'b0111: begin 
         if(a[31]) 
           result = a >> (b & 32'h1F) | signop;
@@ -646,7 +647,7 @@ module alu (input  logic [31:0] a, b,
           result = a >> (b & 32'h1F);
        end // sra
        4'b1000: result = a >> (b & 32'h1f); // sltu
-       4'b1001: result = result = a ^ b; // xor
+       4'b1001: result = a ^ b; // xor
        default: result = 32'bx;
      endcase
 
@@ -664,11 +665,13 @@ module loadalu(
 
   always_comb begin 
     readMemShift = readMem >> (byteAddr[1:0] * 8);
-    case 
-      3'b000: write2Mem = readMemShift[7] ? (readMemShift | 32'hFFFFFF00) : (shiftedReadMem & 32'h000000FF);
-      3'b001:
-
-
+    case(loadctrl)
+      3'b000: write2Mem = readMemShift[7] ? (readMemShift | 32'hFFFFFF00) : (readMemShift & 32'h000000FF);
+      3'b001: write2Mem = readMemShift[15] ? (readMemShift | 32'hFFFF0000) : (readMemShift & 32'h0000FFFF);
+      3'b010: write2Mem = readMem;
+      3'b100: write2Mem = unsigned'(readMemShift) & 32'h000000FF;
+      3'b101: write2Mem = unsigned'(readMemShift) & 32'h0000FFFF;
+      default: write2Mem = 32'bx;
 
     endcase
 
@@ -679,18 +682,74 @@ module loadalu(
 
 
 
-module storealu
+module storealu(
+    input logic [2:0] storectrl,
+    input logic [31:0] Regread, byteAddr, readMem,
+    output logic [31:0] write2Mem
+  );
+
+  always_comb begin 
+    case(storectrl)
+    3'b000: begin 
+      if(byteAddr[1:0] == 0) write2Mem = (readMem & 32'hFFFFFF00) | ((Regread & 32'h000000FF));
+      if(byteAddr[1:0] == 1) write2Mem = (readMem & 32'hFFFF00FF) | ((Regread & 32'h000000FF) << 8);
+      if(byteAddr[1:0] == 2) write2Mem = (readMem & 32'hFF00FFFF) | ((Regread & 32'h000000FF) << 16);
+      if(byteAddr[1:0] == 3) write2Mem = (readMem & 32'h00FFFFFF) | ((Regread & 32'h000000FF) << 24);
+    end
+    3'b001: begin 
+      if(byteAddr[1:0] == 0) write2Mem = (readMem & 32'hFFFF0000) | ((Regread & 32'h0000FFFF));
+      if(byteAddr[1:0] == 2) write2Mem = (readMem & 32'h0000FFFF) | ((Regread & 32'h0000FFFF) << 16);
+    end
+    3'b010: write2Mem = Regread;
+    default: write2Mem = 32'bx;
+    endcase
+  end
 
 
   endmodule
 
 
-module branchalu
-
+module branchalu(
+    input logic Jump,
+    input logic [31:0] a, b,
+    input logic [2:0] branchctrl,
+    input logic PCSource,
+    output logic PCOut
+    );
+  always_comb
+    if(PCSource & !Jump) begin 
+      case(branchctrl)
+        3'b001: begin
+                  if(a != b) PCOut = 1'b1;
+                  else PCOut = 1'b0;
+                  end
+          3'b000: begin
+                  if(a == b) PCOut = 1'b1;
+                  else PCOut = 1'b0;
+                  end
+          3'b100: begin
+                  if(signed'(a) < signed'(b)) PCOut = 1'b1;
+                  else PCOut = 1'b0;
+                  end
+          3'b101: begin
+                  if(signed'(a) >= signed'(b)) PCOut = 1'b1;
+                  else PCOut = 1'b0;
+                  end
+          3'b110: begin
+                  if(unsigned'(a) < unsigned'(b)) PCOut = 1'b1;
+                  else PCOut = 1'b0;
+                  end
+          3'b111: begin
+                  if(unsigned'(a) >= unsigned'(b)) PCOut = 1'b1;
+                  else PCOut = 1'b0;
+                  end
+          default: PCOut = 3'bx;
+    endcase
+    end
+    else if(Jump) PCOut = 1'b1;
+    else PCOut = 1'b0;
 
   endmodule
-
-
 
 
 module regfile (input  logic        clk, 
