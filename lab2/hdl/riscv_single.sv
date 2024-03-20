@@ -84,7 +84,7 @@ module testbench();
    initial
      begin
 	string memfilename;
-        memfilename = {"../riscvtest/riscvtest.memfile"};
+        memfilename = {"../riscvtest/risc_vtest.memfile"};
         $readmemh(memfilename, dut.imem.RAM);
         // Added
         $readmemh(memfilename, dut.dmem.RAM);
@@ -138,14 +138,17 @@ module riscvsingle (
 		    input  logic [31:0] ReadData,
         output logic MemAccess
         );
+   logic [3:0] ALUControl;
+
+  //***************
+    logic [2:0] ImmSrc, branchctrl, loadctrl, storectrl;
+    //*******************
    
    logic 				RegWrite, Jump, Zero, Load, Store, storeInstFlag;
    logic [1:0] 		ALUSrc, ResultSrc, upperImm;
    // Increased to 3 bits
-   logic [3:0] ALUControl;
-   //***************
-   logic [2:0] ImmSrc, branchctrl, loadctrl, storectrl;
-   //*******************
+   
+   
    
 
    //Patrick really increased all controller logic
@@ -154,7 +157,7 @@ module riscvsingle (
 		 ResultSrc, MemWrite, PCSrc, RegWrite, Jump, upperImm,
 		 ImmSrc, ALUControl, 
      //****************************************************
-     branchctrl, ALUsrc, Load, Store, loadctrl, 
+     branchctrl, ALUSrc, Load, Store, loadctrl, 
      storectrl, storeInstFlag, MemAccess);
      //****************************************************
 
@@ -179,11 +182,11 @@ module controller (input  logic [6:0] op,
 		   output logic [2:0] ImmSrc,
 		   output logic [3:0] ALUControl,
        output logic [2:0] branchctrl,
-        output logic [1:0] ALUSrc,
-        output logic       Load, Store,
-        output logic [2:0] loadctrl, storectrl,
-        output logic       storeInstFlag,
-        output logic       MemStrobe);
+       output logic [1:0] ALUSrc,
+       output logic       Load, Store,
+       output logic [2:0] loadctrl, storectrl,
+       output logic       storeInstFlag,
+       output logic       MemStrobe);
    
    logic [1:0] 			      ALUOp;
    logic 			      Branch;
@@ -194,7 +197,7 @@ module controller (input  logic [6:0] op,
 
    aludec ad (op[5], funct3, funct7b5, ALUOp, ALUControl, storeInstFlag);
    loaddec loaddec(Load, funct3, loadctrl);
-   storedec storedec(Store, funt3, storectrl);
+   storedec storedec(Store, funct3, storectrl);
    branchdec branchdec(Branch, funct3, branchctrl, branchflag);
 
    //assign PCSrc = Branch & (Zero ^ funct3[0]) | Jump;
@@ -208,7 +211,7 @@ module maindec (input  logic [6:0] op,
 		output logic 	   Branch,
 		output logic 	   RegWrite, Jump,
     //ImmSrc expanded
-		output logic [1:0] ImmSrc,
+		output logic [2:0] ImmSrc,
 		output logic [1:0] ALUOp,
     output logic [1:0] ALUSrc, upperImm,
     output logic Load, Store,
@@ -233,7 +236,7 @@ module maindec (input  logic [6:0] op,
        7'b0010111: controls = 17'b1_100_01_0_00_0_00_0_11_0_0; // auipc
        7'b1101111: controls = 17'b1_011_00_0_10_0_00_1_00_0_0; // jal
        7'b1100111: controls = 17'b1_000_01_0_11_0_10_1_00_0_0; // jalr
-      default: controls = 17'bx_xxx_xx_x_xx_x_xx_x_xx_x_x_x; // ???
+          default: controls = 17'bx_xxx_xx_x_xx_x_xx_x_xx_x_x; // ???
      endcase // case (op)
    
   endmodule // maindec
@@ -349,12 +352,12 @@ module loaddec (
 
 module storedec (
       input logic Store,
-      input logic [2:0] funt3,
+      input logic [2:0] funct3,
       output logic [2:0] storectrl
     );
     always_comb
       if(Store)begin 
-      case(funt3) 
+      case(funct3) 
       3'b000: storectrl = 3'b000;
       3'b001: storectrl = 3'b001;
       3'b010: storectrl = 3'b010;
@@ -578,7 +581,7 @@ module top (
    logic [31:0] 		PC, Instr, ReadData;
    
    // instantiate processor and memories
-   riscvsingle rv32single (clk, reset, PC, Instr, MemWrite, DataAdr,
+   riscvsingle rv32single (clk, reset, PCException, PC, Instr, MemWrite, DataAdr,
 			   WriteData, ReadData, MemAccess);
    imem imem (PC, Instr);
    dmem dmem (clk, MemWrite, DataAdr, WriteData, ReadData);
