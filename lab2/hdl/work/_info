@@ -23,6 +23,10 @@ R0
 R0
 R0
 R0
+R0
+R0
+R0
+R0
 !s11f MIXED_VERSIONS
 R0
 R0
@@ -76,15 +80,26 @@ R4
 R5
 n@_opt2
 R6
+R1
+T_opt3
+!s110 1711134000
+V5zM=WczRZO7QgL;gM=]Vc1
+R2
+=1-60189533ffe9-65fdd52f-314-5830
+R3
+R4
+R5
+n@_opt3
+R6
 vadder
 Z7 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
-Z8 !s110 1710944879
+Z8 !s110 1711133998
 !i10b 1
 !s100 T=375LAY4^f6_LT6M<V:d0
 IHM1A=_:=J;7ZHUc[k_=?m3
 S1
 Z9 dC:/Users/tyler/Desktop/Package/CompArch/lab2/hdl
-Z10 w1710944873
+Z10 w1711133993
 Z11 8riscv_single.sv
 Z12 Friscv_single.sv
 !i122 0
@@ -94,7 +109,7 @@ Z14 OL;L;2021.3;73
 r1
 !s85 0
 31
-Z15 !s108 1710944879.000000
+Z15 !s108 1711133998.000000
 Z16 !s107 riscv_single.sv|
 Z17 !s90 -reportprogress|300|riscv_single.sv|
 !i113 0
@@ -128,15 +143,15 @@ valudec
 R7
 R8
 !i10b 1
-!s100 Bn5EWBlYiMShKEP0ZQlcZ2
-IS6K613NV0ZA]k[^]4gfIo3
+!s100 ]MF4_B1aTdWlPzCihjT:e2
+IWBad>Hh274b0T;M_lgKoE3
 S1
 R9
 R10
 R11
 R12
 !i122 0
-L0 244 83
+L0 242 83
 R13
 R14
 r1
@@ -176,15 +191,15 @@ vbranchdec
 R7
 R8
 !i10b 1
-!s100 GJ^@V547]Afe^b0CfdJV62
-I:8ZVH3ZeoXd6oBoDckgzJ1
+!s100 jXLZKFBMKb6h^>j5HPmzD3
+IIBXl3eO8EK9me@Lk`Klb?0
 S1
 R9
 R10
 R11
 R12
 !i122 0
-L0 373 28
+L0 371 28
 R13
 R14
 r1
@@ -200,15 +215,15 @@ vcontroller
 R7
 R8
 !i10b 1
-!s100 OB<2odjIc4F?PIA?mELLn2
-Ih;Hdg2[A7ELY48R3?DDmS3
+!s100 U;O^L7N_:HC=>Dgem5OiQ3
+IF?nMGe8;^MBkYJ4ATMSU20
 S1
 R9
 R10
 R11
 R12
 !i122 0
-L0 172 35
+L0 170 35
 R13
 R14
 r1
@@ -224,15 +239,15 @@ vdatapath
 R7
 R8
 !i10b 1
-!s100 :86GKB73:BadDHU@@^:2H3
-IHb_lm<W3DTNb3LFScm38<0
+!s100 e`5cQbGh;RQZGZA5HLE^D2
+IPfZ[cROE3dB7GoRkmIS2O1
 S1
 R9
 R10
 R11
 R12
 !i122 0
-L0 402 56
+L0 400 58
 R13
 R14
 r1
@@ -392,15 +407,15 @@ vloaddec
 R7
 R8
 !i10b 1
-!s100 NbY^E4kffWez6c3EFgf5Z3
-Ie2L6<gR5<;@VV;YPYBKVf1
+!s100 V6;Q^81KljKlP6Z4cgn`90
+Icod@b?cef:1ROEUg`iGD41
 S1
 R9
 R10
 R11
 R12
 !i122 0
-L0 328 24
+L0 326 24
 R13
 R14
 r1
@@ -416,15 +431,15 @@ vmaindec
 R7
 R8
 !i10b 1
-!s100 oaj`oFUh1_O^L_8M6WgWU3
-I8JNnd::_=R7k7JjmSig3V3
+!s100 z02cJidWW;9da@lIJMOb10
+Igcch]6Eo[50AWeI=J_;@11
 S1
 R9
 R10
 R11
 R12
 !i122 0
-L0 208 35
+L0 206 35
 R13
 R14
 r1
@@ -537,15 +552,15 @@ vriscvsingle
 R7
 R8
 !i10b 1
-!s100 YoBdVLf583Z1GYbaib[J?2
-IVGC:WE@1A1Z6I4G6GPB_R0
+!s100 kR<kQ0]SRQ6MIISEW:78l1
+IU@1OQ:<[19iz_om1WUHWf3
 S1
 R9
 R10
 R11
 R12
 !i122 0
-L0 132 39
+L0 132 37
 R13
 R14
 r1
@@ -609,15 +624,15 @@ vstoredec
 R7
 R8
 !i10b 1
-!s100 AZ=XYl<N^156cEz[YREIC2
-IiFTEK6LXVXJcVMoAEbJhM0
+!s100 OKEMidB_9jkWggaGMzRBj2
+IMn=ffEe`GhReOCgd1]M]O2
 S1
 R9
 R10
 R11
 R12
 !i122 0
-L0 353 19
+L0 351 19
 R13
 R14
 r1

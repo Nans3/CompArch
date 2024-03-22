@@ -162,9 +162,7 @@ module riscvsingle (
      //****************************************************
 
   // also expanded the datapath
-   datapath dp (clk, reset, PCException, ALUSrc, ResultSrc, PCSrc,
-		RegWrite, ImmSrc, ALUControl, Zero, PC, Instr,
-		ALUResult, WriteData, ReadData, upperImm, branchctrl, Jump, loadctrl,
+   datapath dp (clk, reset, PCException, ALUSrc, ResultSrc, PCSrc, RegWrite, ImmSrc, ALUControl, Zero, PC, Instr, ALUResult, WriteData, ReadData, upperImm, branchctrl, Jump, loadctrl,
     storectrl, storeInstFlag);
    
   endmodule // riscvsingle
@@ -414,7 +412,9 @@ module datapath(
 		 input  logic [31:0] ReadData,
      // additional
      input logic [1:0] upperImm,
-     input logic [2:0] branchctrl, loadctrl, storectrl,
+     input logic [2:0] branchctrl, 
+     input logic [2:0] loadctrl, 
+     input logic [2:0] storectrl,
      input logic Jump,
      input logic storeInstFlag
      );
